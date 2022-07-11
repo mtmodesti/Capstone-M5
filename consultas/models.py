@@ -11,6 +11,6 @@ class Consulta(models.Model):
     usuario    = models.ForeignKey('usuarios.Usuario', related_name='consulta', on_delete=models.CASCADE)
     medico     = models.ForeignKey('medicos.Medico', related_name='consulta', on_delete=models.CASCADE)
     
-    confirmado = models.BooleanField()
-    compareceu = models.BooleanField()
-    pago       = models.BooleanField()
+    confirmado = models.BooleanField(default=False)
+    compareceu = models.BooleanField(default=False)
+    pago       = models.BooleanField(default=False)
