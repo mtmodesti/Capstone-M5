@@ -8,7 +8,7 @@ class Consulta(models.Model):
 
     paciente   = models.ForeignKey('pacientes.Paciente', related_name='consulta', blank=True, null=True, on_delete=models.CASCADE)
     convenio   = models.OneToOneField('convenios.Convenio', related_name='consulta', on_delete=models.CASCADE)
-    atendente  = models.ForeignKey('atendentes.Atendente', related_name='consulta', on_delete=models.CASCADE)
+    usuario    = models.ForeignKey('usuarios.Usuario', related_name='consulta', on_delete=models.CASCADE)
     medico     = models.ForeignKey('medicos.Medico', related_name='consulta', on_delete=models.CASCADE)
     
     confirmado = models.BooleanField()
