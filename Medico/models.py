@@ -1,12 +1,17 @@
 from django.db import models
+import uuid
+
 
 class Medico(models.Model):
-    nome          = models.CharField(max_length=127, null=False)
+    id            = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    nome          = models.CharField(max_length=127)
     password      = password.CharField(max_length=127)
     especialidade = models.CharField(max_length=127)
     telefone      = models.CharField(max_length=127)
     email         = models.CharField(max_length=127)
-    ativo         = models.BooleanField(default=True, null=False)
+    ativo         = models.BooleanField(default=True)
+
+    
 
 
 
