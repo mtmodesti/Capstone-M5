@@ -21,6 +21,9 @@ class UsuarioCustomizado(BaseUserManager):
     
     def criar_usuario(self, nome, password, **extra_fields):
         return self._criar_usuario(nome, password, False, **extra_fields)
-    
+
+    #def criar_medico(self, nome, password, is_superuser=False, is_staff=False, **extra_fields):
+     #   return self._criar_usuario(nome, password, is_superuser, is_staff, **extra_fields)
+
     def criar_superusuario(self, nome, password, **extra_fields):
         return self._criar_usuario(nome, password, True, **extra_fields)
