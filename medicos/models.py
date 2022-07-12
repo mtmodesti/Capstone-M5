@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from agendas.models import Agenda
 
 
 class Medico(models.Model):
@@ -11,7 +12,5 @@ class Medico(models.Model):
     email         = models.CharField(max_length=127)
     ativo         = models.BooleanField(default=True)
 
-    
-
-
+    agenda = models.ForeignKey(Agenda, on_delete=models.CASCADE, default = None)
 
