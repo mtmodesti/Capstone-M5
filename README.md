@@ -7,14 +7,14 @@ source venv/bin/activate
 pip install -r requirements.txt
 pip freeze > requirements.txt
 
-# Para conectar com o postgres, primeiro crie o .env de acordo com o .env.example, e coloque os valores indicados e o nome do banco de dados db_clinica, e crie o banco no seu postgres, depois...
+Para conectar com o postgres, primeiro crie o .env de acordo com o .env.example, e coloque os valores indicados e o nome do banco de dados db_clinica, e crie o banco no seu postgres, depois...
 
 ./manage.py makemigrations
 ./manage.py migrate
 
 <img src='assets/public/DER.png'>
 
-Pitch
+## Pitch
 
 A ideia do projeto é desenvolver um sistema para um ambiente de uma clínica na área de saúde, mais especificamente para prestadores de serviço, que poderá ser utilizado em diversas áreas à compreender à logística de atendimento.
 Será estruturado um ambiente onde muitos médicos possuem cada um uma respectiva agenda que é controlada por um atendente e, além disso, o cadastro e controle das sessões de cada paciente também será executado
@@ -120,8 +120,6 @@ Permissão: Admin
 
 Status: 204
 
----
-
 ## Consultas:
 
 POST - BASE_URL/consultas/<paciente_id> - criar consulta
@@ -216,8 +214,6 @@ res.body = {
 
 status: 200
 
----
-
 ## Convênio
 
 Verificar via token se usuário é admin
@@ -271,8 +267,6 @@ Req.body = Null
 Res.body = {"msg":"Deletado"}
 
 status 204
-
----
 
 ## Médicos
 
