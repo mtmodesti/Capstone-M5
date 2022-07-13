@@ -23,7 +23,8 @@ urlpatterns = [
     path('consultas/', include('consultas.urls')),
     path("", include("agendas.urls")),
     path("", include("pacientes.urls")),
-    path("", include("convenios.urls"))
+    path("", include("convenios.urls")),
+    path("", include("medicos.urls"))
 ]
 
 

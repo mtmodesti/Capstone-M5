@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from rest_framework.generics import ListAPIView, ListCreateAPIView
+from .models import Medico
+from .serializers import MedicoSerializer
 
-# Create your views here.
+class ShowDoctorView(ListCreateAPIView):
+    queryset = Medico.objects.all()
+    serializer_class = MedicoSerializer
+
+    
+
