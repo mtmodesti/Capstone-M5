@@ -18,7 +18,4 @@ class UsuarioSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Usuario.objects.criar_usuario(**validated_data)
 
-# class LoginSerializer(serializers.Serializer):
-#     nome = serializers.CharField()
-#     password = serializers.CharField()
         
