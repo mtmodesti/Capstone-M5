@@ -380,8 +380,6 @@ DELETE
 BASE_URL/usuarios/<id>
 permissões = ADMIN
 
-Res.body = {"msg":"deletado"}
-
 status: 204
 
 POST
