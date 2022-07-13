@@ -34,11 +34,12 @@ O médico/profissional que realizará atendimento ou procedimento na Clínica, t
 ## URLS:
 
 
-## Pacientes: - ok
+## Pacientes:
 
 
-Admin = Acessa tudo
-Todas rotas precisam de autenticação verificado por token
+Admin = Acessa tudo.
+Todas rotas precisam de autenticação verificado por token.
+
 A criação de pacientes se reserva em receber os convênios somente criados por admin da Clínica e não de banco de dados externos
 Paginação de 20 itens por visualização
 
@@ -60,11 +61,10 @@ Request.body = {
 "data_nascimento":"DATE_FIELD",
 "convenio":"string" - Default "particular"
 }
-
 ```
 
 ```
-Res = {
+Response = {
 id = "read_only",
 "nome":"string",
 "telefone":"string",
@@ -97,6 +97,7 @@ Status: 200
 Permissão: Usuário / Admin / Médico
 GET - BASE_URL/pacientes (listar todos pacientes)
 
+```
 Response = [{
 
 id = "read_only",
@@ -106,7 +107,7 @@ id = "read_only",
 "convenio":"string",
 "data_cadastro":"DATETIME.NOW",
 },...]
-
+```
 
 Status: 200
 
@@ -116,7 +117,7 @@ PATCH - BASE_URL/pacientes/<paciente_id> (atualizar paciente)
 
 Permissão: Atendente / Admin
 
-
+```
 Req.body = {
 "nome":"string",
 "cpf":"string",
@@ -125,6 +126,7 @@ Req.body = {
 "convenio":"string" - Default "particular"
 "atualizado_em":"DATETIME.NOW()",
 }
+```
 OBS: Não pode alterar data de cadastro.
 
 Status: 200
@@ -132,9 +134,9 @@ Status: 200
 DELETE
 BASE_URL/pacientes/<paciente_id> (deletar paciente com o id)
 Permissão: Admin
-
+```
 req.body = {}
-
+```
 Status: 204
 
 ## Consultas:
@@ -145,6 +147,7 @@ Permissão: Usuário / Admin
 
 PS: capturar user id pelo token do usuario id
 
+```
 Req.body = {
 "paciente_id":"string",
 "convenio_id":"string",
@@ -155,8 +158,10 @@ Req.body = {
 "pago":"BOOLEAN", - default False
 "data_da_consulta":"DATETIMEFIELD",
 }
+```
 
 Status: 201
+```
 
 Res = {
 "paciente_id":"string",
@@ -164,12 +169,14 @@ Res = {
 "medico_id":"string",
 "data_da_consulta":"serializer que busca na agenda a data da consulta",
 }
+```
 OBS: Fazer futuramente o response ter a data da consulta
 
 PATCH
 BASE_URL/consultas/<id>
 Permissão: Usuário / Admin
 
+```
 req.body = {
 "paciente_id":"string",
 "convenio_id":"string",
@@ -179,16 +186,20 @@ req.body = {
 "pago":"BOOLEAN", - default False
 "data_da_consulta":"DATETIMEFIELD",
 }
+```
 
+```
 res.body = {retornar toda a consulta atualizada}
+```
 
 status: 200
 
 DELETE
 BASE_URL/consultas/<id>
 permissões = ADMIN, Usuário
-
+```
 req.body = {}
+```
 
 status: 204
 
@@ -196,8 +207,11 @@ GET
 BASE_URL/consultas
 permissões = ADMIN, Usuário
 
+```
 req.body = {}
+```
 
+```
 res.body = [{
 "id":"string",
 "paciente_id":"string",
@@ -208,6 +222,7 @@ res.body = [{
 "pago":"BOOLEAN", - default False
 "data_da_consulta":"DATETIMEFIELD",
 },...]
+```
 
 status: 200
 
@@ -215,8 +230,11 @@ GET POR ID
 BASE_URL/consultas/<id>
 permissões = ADMIN, Usuário
 
+```
 req.body = {}
+```
 
+```
 res.body = {
 "id":"string",
 "paciente_id":"string",
@@ -227,6 +245,7 @@ res.body = {
 "pago":"BOOLEAN", - default False
 "data_da_consulta":"DATETIMEFIELD",
 }
+```
 
 
 status: 200
@@ -250,10 +269,12 @@ GET:
 BASE_URL/convenios
 permissões = ADMIN, Usuário
 
+```
 Res.body = {
 "id":"string",
 "tipo":"string"
 }
+```
 
 
 Status: 200
@@ -264,14 +285,18 @@ POST:
 BASE_URL/convenios
 permissões = ADMIN
 
+```
 Req.body = {
 "tipo":"string"
 }
+```
 
+```
 Res.body = {
 "tipo":"string",
 "admin":"string",
 }
+```
 
 
 status 201
@@ -281,13 +306,17 @@ PATCH:
 BASE_URL/convenios/<id>
 permissões = ADMIN
 
+```
 Req.body{
 "tipo":"string"
 }
+```
 
+```
 Res.body = {
 "admin": {Serializer com dados não sensíveis}
 }
+```
 
 
 status: 200
@@ -298,7 +327,9 @@ DELETE:
 BASE_URL/convenios/delete/<id>
 permissões = ADMIN
 
+```
 Req.body = {}
+```
 
 status: 204
 
@@ -311,8 +342,11 @@ GET:
 BASE_URL/medicos
 permissões: ADMIN, Usuário
 
+```
 Req.body = {}
+```
 
+```
 Res.body = [{
 "id":"string",
 "nome":"string",
@@ -323,6 +357,7 @@ Res.body = [{
 "ativo":"BOOLEAN",
 "registro_profissional":"string",
 },...]
+```
 
 Status: 200
 
@@ -330,6 +365,7 @@ GET POR ID
 BASE_URL/medicos/<id>
 permissões: ADMIN, Usuário
 
+```
 res.body = {
 "id":"string",
 "nome":"string",
@@ -340,6 +376,7 @@ res.body = {
 "ativo":"BOOLEAN",
 "registro_profissional":"string",
 }
+```
 
 
 Status: 200
@@ -348,6 +385,7 @@ Status: 200
 POST:
 Permissões: ADMIN
 
+```
 Req.body = {
 "nome":"string",
 "email":"string",
@@ -356,7 +394,9 @@ Req.body = {
 "dias_de_atendimento":"SERIALIZER DE AGENDA VAZIA",
 "especialidade":"string",
 }
+```
 
+```
 Res.body =
 {
 "id":"string",
@@ -366,6 +406,7 @@ Res.body =
 "dias_de_atendimento":"SERIALIZER DE AGENDA VAZIA",
 "especialidade":"string",
 }
+```
 
 Status: 201
 
@@ -382,6 +423,7 @@ status: 204
 PATCH:
 Permissões: ADMIN
 
+```
 Req.body = {
 "nome":"string",
 "email":"string",
@@ -390,8 +432,11 @@ Req.body = {
 "dias_de_atendimento":"SERIALIZER DE AGENDA VAZIA",
 "especialidade":"string",
 }
+```
 
+```
 Res.body = {Voltar usuário atualizado com dados não sensíveis}
+```
 
 
 status: 200
@@ -408,6 +453,7 @@ GET - Listar todos usuários
 permissões = ADMIN
 BASE_URL/usuarios
 Req.body = {}
+```
 Res.body = [{
 "id":"string",
 "nome":"string",
@@ -415,6 +461,7 @@ Res.body = [{
 "senha":"string",
 "ativo":"BOOLEAN",
 },...]
+```
 
 status: 200
 
@@ -422,12 +469,14 @@ GET POR ID
 BASE_URL/usuarios/<id>
 permissões = ADMIN
 
+```
 Res.body = {
 "id":"string",
 "email":"string",
 "nome":"string",
 "ativo":"BOOLEAN",
 }
+```
 
 status: 200
 
@@ -441,15 +490,19 @@ POST
 BASE_URL/usuarios
 permissões = ADMIN
 
+```
 Req.body = {
 "nome":"string",
 "email":"string",
 "senha":"string",
 }
+```
 
+```
 Res.body = {
 retorna usuário sem dados sensíveis
 }
+```
 
 status: 201
 
@@ -457,15 +510,19 @@ UPDATE
 BASE_URL/usuarios/<id>
 permissões = ADMIN
 
+```
 Req.body = {
 "email":"string",
 "nome":"string",
 "senha":"string",
 "ativo":"BOOLEAN",
 }
+```
 
 
+```
 Res.body = {"Usuário atualizado"}
+```
 
 status: 201
 
@@ -483,12 +540,14 @@ Permissões: ADMIN, Usuário
 
 req.body = {}
 
+```
 res.body = [{
 "id":"string",
 "consulta_id":"string",
 "medico_id":""string,
 "data_consulta":"DATETIMEFIELD",
 },...]
+```
 
 status: 200
 
@@ -496,12 +555,14 @@ GET POR ID
 BASE_URL/agendas/<id>
 Permissões: ADMIN, Usuário, Médico
 
+```
 res.body = {
 "id":"string",
 "consulta_id":"string",
 "medico_id":""string,
 "data_consulta":"DATETIMEFIELD",
 }
+```
 
 DELETE
 BASE_URL/agendas/<id>
@@ -518,18 +579,22 @@ Permissões: ADMIN, Usuário
 
 
 
+```
 req.body = {
 "consulta_id":"string",
 "medico_id":""string,
 "data_consulta":"DATETIMEFIELD",
 }
+```
 
+```
 res.body = {
 "id":"string",
 "consulta_id":"string",
 "medico_id":""string,
 "data_consulta":"DATETIMEFIELD",
 }
+```
 
 status: 201
 
@@ -540,12 +605,14 @@ Permissões: ADMIN, Usuário
 
 
 
+```
 req.body =  {
 
 "consulta_id":"string",
 "medico_id":""string,
 "data_consulta":"DATETIMEFIELD",
 }
+```
 
 
 status: 200
