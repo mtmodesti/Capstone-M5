@@ -38,11 +38,14 @@ O médico/profissional que realizará atendimento ou procedimento na Clínica, t
 
 
 Admin = Acessa tudo
-Todas rotas precisam de autenticação
+Todas rotas precisam de autenticação verificado por token
+A criação de pacientes se reserva em receber os convênios somente criados por admin da Clínica e não de banco de dados externos
 Paginação de 20 itens por visualização
 
 
-BASE_URL/pacientes - (criar paciente / capturado por token)
+POST
+BASE_URL/pacientes
+
 Permissão: Usuário / Admin
 POST - BASE_URL/pacientes (criar paciente / capturado por token)
 
@@ -123,12 +126,9 @@ Status: 200
 
 DELETE
 BASE_URL/pacientes/<paciente_id> (deletar paciente com o id)
+Permissão: Admin
 
 req.body = {}
-
-res.body = {"msg":"deletado"}
-
-Permissão: Admin
 
 Status: 204
 
@@ -177,15 +177,13 @@ req.body = {
 
 res.body = {retornar toda a consulta atualizada}
 
-status: 201
+status: 200
 
 DELETE
 BASE_URL/consultas/<id>
 permissões = ADMIN, Usuário
 
 req.body = {}
-
-res.body = {"msg":"deletado"}
 
 status: 204
 
@@ -253,7 +251,8 @@ Res.body = {
 }
 
 
-Status 200
+Status: 200
+
 
 
 POST:
@@ -286,18 +285,17 @@ Res.body = {
 }
 
 
-status 200
+status: 200
+
 
 
 DELETE:
 BASE_URL/convenios/delete/<id>
 permissões = ADMIN
 
-Req.body = Null
+Req.body = {}
 
-Res.body = {"msg":"Deletado"}
-
-status 204
+status: 204
 
 
 ## Médicos
@@ -308,7 +306,7 @@ GET:
 BASE_URL/medicos
 permissões: ADMIN, Usuário
 
-Req.body = Null
+Req.body = {}
 
 Res.body = [{
 "id":"string",
@@ -320,6 +318,8 @@ Res.body = [{
 "ativo":"BOOLEAN",
 "registro_profissional":"string",
 },...]
+
+Status: 200
 
 GET POR ID
 BASE_URL/medicos/<id>
@@ -337,8 +337,8 @@ res.body = {
 }
 
 
+Status: 200
 
-=======
 
 POST:
 Permissões: ADMIN
@@ -362,15 +362,13 @@ Res.body =
 "especialidade":"string",
 }
 
-Status 201
+Status: 201
 
 DELETE:
 Permissões: ADMIN
 BASE_URL/medicos/delete/<id>
 
-Res.body = {"msg":"deletado"}
-
-status 200
+status: 204
 
 
 
@@ -391,7 +389,8 @@ Req.body = {
 Res.body = {Voltar usuário atualizado com dados não sensíveis}
 
 
-status 200
+status: 200
+
 
 
 ------------------------------------------------------------------------------------
@@ -407,10 +406,12 @@ Req.body = {}
 Res.body = [{
 "id":"string",
 "nome":"string",
+"email":"string",
 "senha":"string",
 "ativo":"BOOLEAN",
 },...]
-status 200
+
+status: 200
 
 GET POR ID
 BASE_URL/usuarios/<id>
@@ -418,19 +419,18 @@ permissões = ADMIN
 
 Res.body = {
 "id":"string",
+"email":"string",
 "nome":"string",
 "ativo":"BOOLEAN",
 }
 
-status 200
+status: 200
 
 DELETE
 BASE_URL/usuarios/<id>
 permissões = ADMIN
 
-Res.body = {"msg":"deletado"}
-
-status 200
+status: 204
 
 POST
 BASE_URL/usuarios
@@ -438,6 +438,7 @@ permissões = ADMIN
 
 Req.body = {
 "nome":"string",
+"email":"string",
 "senha":"string",
 }
 
@@ -445,13 +446,14 @@ Res.body = {
 retorna usuário sem dados sensíveis
 }
 
-status 201
+status: 201
 
 UPDATE
 BASE_URL/usuarios/<id>
 permissões = ADMIN
 
 Req.body = {
+"email":"string",
 "nome":"string",
 "senha":"string",
 "ativo":"BOOLEAN",
@@ -460,7 +462,7 @@ Req.body = {
 
 Res.body = {"Usuário atualizado"}
 
-status 201
+status: 201
 
 ## AGENDA - Médico só consulta a própria agenda verificado por token
 
@@ -483,7 +485,7 @@ res.body = [{
 "data_consulta":"DATETIMEFIELD",
 },...]
 
-status 200
+status: 200
 
 GET POR ID
 BASE_URL/agendas/<id>
@@ -502,9 +504,7 @@ Permissões: ADMIN, Usuário
 
 req.body = {}
 
-res.body = {"msg":"deletado"}
-
-status 200
+status: 204
 
 POST
 BASE_URL/agendas
@@ -526,7 +526,7 @@ res.body = {
 "data_consulta":"DATETIMEFIELD",
 }
 
-status 201
+status: 201
 
 PATCH
 BASE_URL/agendas/<id>
@@ -543,9 +543,5 @@ req.body =  {
 }
 
 
-status 201
-
-res.body = {agenda atualizada}
-status 200
-
+status: 200
 

@@ -14,14 +14,7 @@ class ListCreateConsultaView(generics.ListCreateAPIView):
 
 
     def perform_create(self, serializer):
-        # print("-"*50)
-        # print(self.kwargs["paciente_id"])
-        # print("-"*50)
-
-        import ipdb
-
-        # ipdb.set_trace()
-        
+      
 
         return serializer.save(usuario=self.request.user, paciente=self.kwargs["paciente_id"])
 
