@@ -16,5 +16,6 @@ class CreateConvenioView( ListCreateAPIView):
     permission_classes = [isSuperUser]
 
     queryset = Convenio.objects.all()
+    
     serializer_class = RetrieveUpdateDestroySerializer
 
