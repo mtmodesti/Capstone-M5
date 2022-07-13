@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('consultas/', include('consultas.urls')),
     path("", include("agendas.urls")),
-    path("", include("pacientes.urls"))
+    path("", include("pacientes.urls")),
+    path("", include("convenios.urls"))
 ]
 
 

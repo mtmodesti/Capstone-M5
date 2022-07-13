@@ -20,5 +20,4 @@ class UsuarioCustomizado(BaseUserManager):
         return usuario
  
     def create_superuser(self, nome, password, **extra_fields):
-        print('oi to')
         return self._criar_usuario(nome, password, True, **extra_fields)
