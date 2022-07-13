@@ -1,4 +1,3 @@
-import ipdb
 from convenios.models import Convenio
 from django.shortcuts import get_object_or_404
 from medicos.models import Medico
@@ -17,7 +16,6 @@ class ConsultaSerializer(ModelSerializer):
 
     def create(self, validated_data: dict):
 
-        # ipdb.set_trace()
 
         paciente_id = validated_data.pop("paciente")
         convenio_data = validated_data.pop("convenio")
