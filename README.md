@@ -20,6 +20,7 @@ A ideia do projeto é desenvolver um sistema para um ambiente de uma clínica na
 Será estruturado um ambiente onde muitos médicos possuem cada um uma respectiva agenda que é controlada por um atendente e, além disso, o cadastro e controle das sessões de cada paciente também será executado
 pelo mesmo. Para além disso, os pacientes podem ser integrantes ou não de algum convênio específico que deverá ser especificado quando solicitado.<br>
 A motivação surgiu após conversarmos entre os integrantes do grupo e observarmos que esse é um problema comum em vários ambientes com um grande número de pacientes que necessitam de um controle eficaz.
+
 Dessa maneira, o problema a ser resolvido constitui-se na criação de um software com várias tabelas que irão se relacionar entre si de maneira eficiente com o objetivo de controlar de forma adequada todo o fluxo de atendimento desde o agendamento e evitando aborrecimentos e complicações desnecessárias tanto por parte dos colaboradores, quando por parte dos clientes.
 Para o projeto, iremos utilizar ferramentas como Python, Django e Django Rest Framework para criar as tabelas e relações, os bancos de dados serão criados a partir do postgresSQL. Implementaremos também um sistema de validação de acessos de usuários comuns e administradores com uso de tokens através do JWT.
 
@@ -32,17 +33,22 @@ O médico/profissional que realizará atendimento ou procedimento na Clínica, t
 
 ## URLS:
 
-## Pacientes:
+
+## Pacientes: - ok
+
 
 Admin = Acessa tudo
 Todas rotas precisam de autenticação
 Paginação de 20 itens por visualização
 
-POST
+
 BASE_URL/pacientes - (criar paciente / capturado por token)
 Permissão: Usuário / Admin
+POST - BASE_URL/pacientes (criar paciente / capturado por token)
 
-Req.body = {
+
+Request.body = {
+
 "nome":"string",
 "cpf":"string",
 "telefone":"string",
@@ -59,13 +65,16 @@ id = "read_only",
 "data_cadastro":"DATETIME.NOW",
 }
 
+
 Status: 201
 
 GET POR ID
 BASE_URL/pacientes/<paciente_id> (capturar paciente por id)
 Permissão: Usuário / Admin / Médico
 
-Res = {
+
+Response = {
+
 id = "read_only",
 "nome":"string",
 "telefone":"string",
@@ -74,15 +83,14 @@ id = "read_only",
 "data_cadastro":"DATETIME.NOW",
 }
 
+
 Status: 200
 
-Permissão: Usuário / Admin
-
-GET
-BASE_URL/pacientes (listar todos pacientes)
 Permissão: Usuário / Admin / Médico
+GET - BASE_URL/pacientes (listar todos pacientes)
 
-Res = [{
+Response = [{
+
 id = "read_only",
 "nome":"string",
 "telefone":"string",
@@ -91,11 +99,15 @@ id = "read_only",
 "data_cadastro":"DATETIME.NOW",
 },...]
 
+
 Status: 200
 
-PATCH
-BASE_URL/pacientes/<paciente_id> (atualizar paciente)
-Permissão: Usuário / Admin
+Permissão: Atendente / Admin / Médico
+
+PATCH - BASE_URL/pacientes/<paciente_id> (atualizar paciente)
+
+Permissão: Atendente / Admin
+
 
 Req.body = {
 "nome":"string",
@@ -124,6 +136,7 @@ Status: 204
 
 POST - BASE_URL/consultas/<paciente_id> - criar consulta
 Permissão: Usuário / Admin
+
 
 PS: capturar user id pelo token do usuario id
 
@@ -212,11 +225,23 @@ res.body = {
 "data_da_consulta":"DATETIMEFIELD",
 }
 
+
 status: 200
+
 
 ## Convênio
 
+
 Verificar via token se usuário é admin
+
+Somente ADMIN cria, atuaiza e deleta um convênio
+
+
+-------------------------
+
+
+GET - funcionário e admin pode fazer o get
+
 
 GET:
 BASE_URL/convenios
@@ -227,7 +252,9 @@ Res.body = {
 "tipo":"string"
 }
 
+
 Status 200
+
 
 POST:
 BASE_URL/convenios
@@ -242,7 +269,9 @@ Res.body = {
 "admin":"string",
 }
 
+
 status 201
+
 
 PATCH:
 BASE_URL/convenios/<id>
@@ -256,7 +285,9 @@ Res.body = {
 "admin": {Serializer com dados não sensíveis}
 }
 
+
 status 200
+
 
 DELETE:
 BASE_URL/convenios/delete/<id>
@@ -268,7 +299,9 @@ Res.body = {"msg":"Deletado"}
 
 status 204
 
+
 ## Médicos
+
 
 Acesso interno da clínica (admin, funcionário), precisa estar autenticado.
 GET:
@@ -303,6 +336,10 @@ res.body = {
 "registro_profissional":"string",
 }
 
+
+
+=======
+
 POST:
 Permissões: ADMIN
 
@@ -335,6 +372,10 @@ Res.body = {"msg":"deletado"}
 
 status 200
 
+
+
+=======
+
 PATCH:
 Permissões: ADMIN
 
@@ -349,7 +390,13 @@ Req.body = {
 
 Res.body = {Voltar usuário atualizado com dados não sensíveis}
 
+
 status 200
+
+
+------------------------------------------------------------------------------------
+
+
 
 ## Rota de usuários
 
@@ -410,13 +457,20 @@ Req.body = {
 "ativo":"BOOLEAN",
 }
 
+
 Res.body = {"Usuário atualizado"}
 
 status 201
 
 ## AGENDA - Médico só consulta a própria agenda verificado por token
 
-GET
+----------------------------------------------------------------
+ROTA DE AGENDA
+
+
+GET 
+=======
+
 BASE_URL/agendas
 Permissões: ADMIN, Usuário
 
@@ -454,7 +508,10 @@ status 200
 
 POST
 BASE_URL/agendas
+
 Permissões: ADMIN, Usuário
+
+
 
 req.body = {
 "consulta_id":"string",
@@ -473,18 +530,22 @@ status 201
 
 PATCH
 BASE_URL/agendas/<id>
+
 Permissões: ADMIN, Usuário
 
-req.body = {
+
+
+req.body =  {
+
 "consulta_id":"string",
 "medico_id":""string,
 "data_consulta":"DATETIMEFIELD",
 }
 
-res.body = {
-"consulta_id":"string",
-"medico_id":""string,
-"data_consulta":"DATETIMEFIELD",
-}
 
 status 201
+
+res.body = {agenda atualizada}
+status 200
+
+
