@@ -23,13 +23,13 @@ Será estruturado um ambiente onde muitos médicos possuem cada um uma respectiv
 pelo mesmo. Para além disso, os pacientes podem ser integrantes ou não de algum convênio específico que deverá ser especificado quando solicitado.<br>
 A motivação surgiu após conversarmos entre os integrantes do grupo e observarmos que esse é um problema comum em vários ambientes com um grande número de pacientes que necessitam de um controle eficaz.
 Dessa maneira, o problema a ser resolvido constitui-se na criação de um software com várias tabelas que irão se relacionar entre si de maneira eficiente com o objetivo de controlar de forma adequada todo o fluxo de atendimento desde o agendamento e evitando aborrecimentos e complicações desnecessárias tanto por parte dos colaboradores, quando por parte dos clientes.
-Para o projeto, iremos utilizar ferramentas como Python, Django e Django Rest Framework para criar as tabelas e relações, os bancos de dados serão criados a partir do postgresSQL. Implementaremos também um sistema de validação de acessos de usuários comuns e administradores com uso de tokens através do JWT.
+Para o projeto, iremos utilizar ferramentas como Python, Django e Django Rest Framework para criar as tabelas e relações, os bancos de dados serão criados a partir do postgresSQL. Implementaremos também um sistema de validação de acessos de usuários comuns e Administradores com uso de tokens através do JWT.
 
 <img src='assets/public/doc.gif'>
 
 Descrição da aplicação:
-O usuário Administrador/Gerente (admin) da Clínica tem acesso a todas as rotas, é permitido inserir ou deletar dados em qualquer tabela, assim como terá a possibilidade de realizar buscas e filtros em todas as tabelas.
-O atendente (usuario) tem acesso a criar paciente, tendo em seus campos obrigatórios a limitação de somente escolher algumas opções de tipo de convênio, somente aqueles que foram criados pela administração da Clínica e não dos convênio vindos de banco de dados externos, pode criar consultas e alterar (atualizar) os dados dessa consulta, o campo data da consulta é relativo ao campo de data de consulta da tabela agenda previamente habilitado pela administração, em feature futura poderá criar receitas derivadas de seu atendimento.
+O usuário Administrador/Gerente (Admin) da Clínica tem acesso a todas as rotas, é permitido inserir ou deletar dados em qualquer tabela, assim como terá a possibilidade de realizar buscas e filtros em todas as tabelas.
+O atendente (usuario) tem acesso a criar paciente, tendo em seus campos obrigatórios a limitação de somente escolher algumas opções de tipo de convênio, somente aqueles que foram criados pela Administração da Clínica e não dos convênio vindos de banco de dados externos, pode criar consultas e alterar (atualizar) os dados dessa consulta, o campo data da consulta é relativo ao campo de data de consulta da tabela agenda previamente habilitado pela Administração, em feature futura poderá criar receitas derivadas de seu atendimento.
 O médico/profissional que realizará atendimento ou procedimento na Clínica, terá acesso somente à sua agenda, poderá inserir informações na tabela anamnese do paciente que passar por sua consulta, em feature futura poderá criar receitas derivadas de seu atendimento.
 
 ## URLS:
@@ -38,7 +38,7 @@ O médico/profissional que realizará atendimento ou procedimento na Clínica, t
 
 Admin = Acessa tudo.
 Todas rotas precisam de autenticação verificado por token.
-A criação de pacientes se reserva em receber os convênios somente criados por admin da Clínica e não de banco de dados externos
+A criação de pacientes se reserva em receber os convênios somente criados por Admin da Clínica e não de banco de dados externos
 Paginação de 20 itens por visualização
 
 POST
@@ -171,7 +171,7 @@ status: 200
 
 DELETE
 BASE_URL/consultas/<id>
-permissões = ADMIN, Usuário
+permissões = Admin, Usuário
 
 req.body = {}
 
@@ -179,7 +179,7 @@ status: 204
 
 GET
 BASE_URL/consultas
-permissões = ADMIN, Usuário
+permissões = Admin, Usuário
 
 req.body = {}
 
@@ -198,7 +198,7 @@ status: 200
 
 GET POR ID
 BASE_URL/consultas/<id>
-permissões = ADMIN, Usuário
+permissões = Admin, Usuário
 
 req.body = {}
 
@@ -217,11 +217,11 @@ status: 200
 
 ## Convênio
 
-Verificar via token se usuário é admin
+Verificar via token se usuário é Admin
 
 GET:
 BASE_URL/convenios
-permissões = ADMIN, Usuário
+permissões = Admin, Usuário
 
 req.body = {}
 
@@ -234,7 +234,7 @@ Status: 200
 
 POST:
 BASE_URL/convenios
-permissões = ADMIN
+permissões = Admin
 
 req.body = {
 "tipo":"string"
@@ -242,28 +242,28 @@ req.body = {
 
 res.body = {
 "tipo":"string",
-"admin":"string",
+"Admin":"string",
 }
 
 status 201
 
 PATCH:
 BASE_URL/convenios/<id>
-permissões = ADMIN
+permissões = Admin
 
 req.body{
 "tipo":"string"
 }
 
 res.body = {
-"admin": {Serializer com dados não sensíveis}
+"Admin": {Serializer com dados não sensíveis}
 }
 
 status: 200
 
 DELETE:
 BASE_URL/convenios/delete/<id>
-permissões = ADMIN
+permissões = Admin
 
 req.body = {}
 
@@ -271,10 +271,10 @@ status: 204
 
 ## Médicos
 
-Acesso interno da clínica (admin, funcionário), precisa estar autenticado.
+Acesso interno da clínica (Admin, funcionário), precisa estar autenticado.
 GET:
 BASE_URL/medicos
-permissões: ADMIN, Usuário
+permissões: Admin, Usuário
 
 req.body = {}
 
@@ -293,7 +293,7 @@ Status: 200
 
 GET POR ID
 BASE_URL/medicos/<id>
-permissões: ADMIN, Usuário
+permissões: Admin, Usuário
 
 req.body = {}
 
@@ -311,7 +311,7 @@ res.body = {
 Status: 200
 
 POST:
-Permissões: ADMIN
+Permissões: Admin
 
 req.body = {
 "nome":"string",
@@ -335,13 +335,13 @@ res.body =
 Status: 201
 
 DELETE:
-Permissões: ADMIN
+Permissões: Admin
 BASE_URL/medicos/delete/<id>
 
 status: 204
 
 PATCH:
-Permissões: ADMIN
+Permissões: Admin
 
 req.body = {
 "nome":"string",
@@ -359,7 +359,7 @@ status: 200
 ## Rota de usuários
 
 GET - Listar todos usuários
-permissões = ADMIN
+permissões = Admin
 BASE_URL/usuarios
 
 req.body = {}
@@ -376,7 +376,7 @@ status: 200
 
 GET POR ID
 BASE_URL/usuarios/<id>
-permissões = ADMIN
+permissões = Admin
 
 req.body = {}
 
@@ -391,13 +391,13 @@ status: 200
 
 DELETE
 BASE_URL/usuarios/<id>
-permissões = ADMIN
+permissões = Admin
 
 status: 204
 
 POST
 BASE_URL/usuarios
-permissões = ADMIN
+permissões = Admin
 
 req.body = {
 "nome":"string",
@@ -413,7 +413,7 @@ status: 201
 
 UPDATE
 BASE_URL/usuarios/<id>
-permissões = ADMIN
+permissões = Admin
 
 req.body = {
 "email":"string",
@@ -430,7 +430,7 @@ status: 201
 
 GET
 BASE_URL/agendas
-Permissões: ADMIN, Usuário
+Permissões: Admin, Usuário
 
 req.body = {}
 
@@ -445,7 +445,7 @@ status: 200
 
 GET POR ID
 BASE_URL/agendas/<id>
-Permissões: ADMIN, Usuário, Médico
+Permissões: Admin, Usuário, Médico
 
 res.body = {
 "id":"string",
@@ -456,7 +456,7 @@ res.body = {
 
 DELETE
 BASE_URL/agendas/<id>
-Permissões: ADMIN, Usuário
+Permissões: Admin, Usuário
 
 req.body = {}
 
@@ -464,7 +464,7 @@ status: 204
 
 POST
 BASE_URL/agendas
-Permissões: ADMIN, Usuário
+Permissões: Admin, Usuário
 
 req.body = {
 "consulta_id":"string",
@@ -483,7 +483,7 @@ status: 201
 
 PATCH
 BASE_URL/agendas/<id>
-Permissões: ADMIN, Usuário
+Permissões: Admin, Usuário
 
 req.body = {
 "consulta_id":"string",
