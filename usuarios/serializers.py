@@ -4,7 +4,7 @@ from .models import Usuario
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ["id" ,"nome", "is_active", "password"]
+        fields = ["id" ,"nome", "email", "is_active", "password"]
         
         extra_kwargs = {"password": {"write_only": True}}
     
@@ -12,6 +12,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
         return {
             "id": instance.id,
             "nome": instance.nome,
+            "email": instance.email,
             "ativo": instance.is_active
         }
     

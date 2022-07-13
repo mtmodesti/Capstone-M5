@@ -11,7 +11,6 @@ class Medico(models.Model):
     password        = models.CharField(max_length=127)
     especialidade   = models.CharField(max_length=127)
     telefone        = models.CharField(max_length=127)
-    email           = models.CharField(max_length=127)
     ativo           = models.BooleanField(default=True)
    #agente_de_saude = models.BooleanField()
 
