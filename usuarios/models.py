@@ -8,7 +8,7 @@ from usuarios.utils import UsuarioCustomizado
 class Usuario(AbstractUser):
     id = models.CharField(primary_key=True, default=uuid.uuid4, max_length=255)
     nome = models.CharField(max_length=255, unique=True)
-    
+    agente_de_saude = models.BooleanField(default=False)
     username = None
     
     USERNAME_FIELD = "nome"

@@ -1,27 +1,59 @@
 from django.contrib.auth.models import BaseUserManager
+from medicos.models import Medico
 
 class UsuarioCustomizado(BaseUserManager):
     
-    def _criar_usuario(self, nome, password, is_superuser, **extra_fields):
+    def _criar_usuario(self, nome, password, is_superuser, is_staff, agente_de_saude, **extra_fields):
         if not nome:
             raise ValueError({"erro": "O nome não pode ficar vazio"})
-        
         usuario = self.model(
             nome = nome,
             is_active=True,
             is_superuser=is_superuser,
+            is_staff=is_staff,
+            agente_de_saude=agente_de_saude,
             **extra_fields
         )
-        
         usuario.set_password(password)
-        
         usuario.save(using=self.db)
-        
+        return usuario
+
+    def _criar_usuario_agente_de_saude(
+        self,
+        nome,
+        password,
+        is_superuser,
+        is_staff,
+        agente_de_saude,
+        especialidade,
+        telefone,
+        **extra_fields
+    ):
+        if not nome:
+            raise ValueError({"erro": "O nome não pode ficar vazio"})
+        usuario = self.model(
+            nome = nome,
+            is_active=True,
+            is_superuser=is_superuser,
+            is_staff=is_staff,
+            agente_de_saude=agente_de_saude,
+            **extra_fields
+        )
+        usuario.set_password(password)
+        usuario.save(using=self.db)
+        medico_data = {
+            "especialidade": especialidade,
+            "telefone": telefone
+        }
+        Medico.objects.create(**medico_data, usuario=usuario)
         return usuario
     
     def criar_usuario(self, nome, password, **extra_fields):
-        return self._criar_usuario(nome, password, False, **extra_fields)
+        return self._criar_usuario(nome, password, False, True, False, **extra_fields)
     
     def create_superuser(self, nome, password, **extra_fields):
-        return self._criar_usuario(nome, password, True, **extra_fields)
+        return self._criar_usuario(nome, password, True, True, False,**extra_fields)
+
+    def criar_agente_de_saude(self, nome, password, **extra_fields):
+        instance = self._criar_usuario_agente_de_saude(nome, password, False, False, True, **extra_fields)
 
