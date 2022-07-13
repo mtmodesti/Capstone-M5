@@ -3,7 +3,9 @@ import uuid
 from agendas.models import Agenda
 
 
+
 class Medico(models.Model):
+
     id            = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     nome          = models.CharField(max_length=127)
     password      = models.CharField(max_length=127)
@@ -13,4 +15,3 @@ class Medico(models.Model):
     ativo         = models.BooleanField(default=True)
 
     agenda = models.ForeignKey(Agenda, on_delete=models.CASCADE, default = None)
-
