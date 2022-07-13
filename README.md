@@ -34,8 +34,8 @@ O médico/profissional que realizará atendimento ou procedimento na Clínica, t
 
 ## Pacientes:
 
-Admin = Acessa tudo
-Todas rotas precisam de autenticação verificado por token
+Admin = Acessa tudo.
+Todas rotas precisam de autenticação verificado por token.
 A criação de pacientes se reserva em receber os convênios somente criados por admin da Clínica e não de banco de dados externos
 Paginação de 20 itens por visualização
 
