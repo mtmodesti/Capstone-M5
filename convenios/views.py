@@ -9,6 +9,7 @@ class RetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     permission_classes = [isSuperUser]
 
     queryset = Convenio.objects.all()
+    
     serializer_class = RetrieveUpdateDestroySerializer
 
 class CreateConvenioView( ListCreateAPIView):
@@ -16,6 +17,6 @@ class CreateConvenioView( ListCreateAPIView):
     permission_classes = [isSuperUser]
 
     queryset = Convenio.objects.all()
-    
+
     serializer_class = RetrieveUpdateDestroySerializer
 
