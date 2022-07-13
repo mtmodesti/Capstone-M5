@@ -7,5 +7,3 @@ class Agenda(models.Model):
     )
     data_consulta = models.DateTimeField()
     medico_id = models.CharField(max_length=255, null=True)
-
-
