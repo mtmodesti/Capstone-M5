@@ -17,6 +17,12 @@ from django.contrib import admin
 from django.urls import include, path
 
 
-urlpatterns = [path("admin/", admin.site.urls), path("", include("pacientes.urls"))]
-urlpatterns = [path("admin/", admin.site.urls), path("", include("agendas.urls"))]
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('consultas/', include('consultas.urls')),
+    path("", include("agendas.urls")),
+    path("", include("pacientes.urls"))
+]
+
 
