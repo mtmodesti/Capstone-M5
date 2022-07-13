@@ -8,6 +8,7 @@ from .models import Usuario
 class ListCreateUsuarioView(generics.ListCreateAPIView):
     permission_classes = [isSuperUser]
     queryset = Usuario.objects.all()
+    
     serializer_class = UsuarioSerializer
 
 class RetrieveUpdateDestroyUsuarioView(generics.RetrieveUpdateDestroyAPIView):
