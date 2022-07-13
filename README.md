@@ -34,7 +34,7 @@ O médico/profissional que realizará atendimento ou procedimento na Clínica, t
 ## URLS:
 
 
-## Pacientes: - ok
+## Pacientes:
 
 
 Admin = Acessa tudo
@@ -59,7 +59,7 @@ Request.body = {
 "convenio":"string" - Default "particular"
 }
 
-Res = {
+Response = {
 id = "read_only",
 "nome":"string",
 "telefone":"string",
