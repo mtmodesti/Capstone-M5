@@ -8,5 +8,14 @@ class UsuarioSerializer(serializers.ModelSerializer):
         
         extra_kwargs = {"password": {"write_only": True}}
     
+    def to_representation(self, instance):
+        return {
+            "id": instance.id,
+            "nome": instance.nome,
+            "ativo": instance.is_active
+        }
+    
     def create(self, validated_data):
         return Usuario.objects.criar_usuario(**validated_data)
+
+        
