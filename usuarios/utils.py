@@ -3,8 +3,6 @@ from django.contrib.auth.models import BaseUserManager
 class UsuarioCustomizado(BaseUserManager):
     
     def _criar_usuario(self, nome, password, is_superuser, **extra_fields):
-        if not nome:
-            raise ValueError({"erro": "O nome não pode ficar vazio"})
         
         usuario = self.model(
             nome = nome,
