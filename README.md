@@ -50,6 +50,8 @@ Permissão: Usuário / Admin
 POST - BASE_URL/pacientes (criar paciente / capturado por token)
 
 
+```
+
 Request.body = {
 
 "nome":"string",
@@ -59,6 +61,9 @@ Request.body = {
 "convenio":"string" - Default "particular"
 }
 
+```
+
+```
 Res = {
 id = "read_only",
 "nome":"string",
@@ -67,7 +72,7 @@ id = "read_only",
 "convenio":"string",
 "data_cadastro":"DATETIME.NOW",
 }
-
+```
 
 Status: 201
 
@@ -75,7 +80,7 @@ GET POR ID
 BASE_URL/pacientes/<paciente_id> (capturar paciente por id)
 Permissão: Usuário / Admin / Médico
 
-
+```
 Response = {
 
 id = "read_only",
@@ -85,7 +90,7 @@ id = "read_only",
 "convenio":"string",
 "data_cadastro":"DATETIME.NOW",
 }
-
+```
 
 Status: 200
 
