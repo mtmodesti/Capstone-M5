@@ -5,18 +5,22 @@ from rest_framework.reverse import reverse
 from .models import Consulta
 from .serializers import ConsultaSerializer
 
-Paciente
 
-
-class ListCreateConsultaView(generics.ListCreateAPIView):
+class ListConsultaView(generics.ListAPIView):
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
 
 
-    def perform_create(self, serializer):
-      
+class CreateConsultaView(generics.CreateAPIView):
+    queryset = Consulta.objects.all()
+    serializer_class = ConsultaSerializer
 
-        return serializer.save(usuario=self.request.user, paciente=self.kwargs["paciente_id"])
+    def perform_create(self, serializer):
+        return serializer.save(
+            usuario=self.request.user,
+            paciente=self.kwargs["paciente_id"],
+            medico=self.kwargs["medico_id"]
+        )
 
 class RetrieveUpdateDestroyConsultaView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Consulta.objects.all()

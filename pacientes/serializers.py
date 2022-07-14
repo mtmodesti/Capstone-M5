@@ -10,14 +10,16 @@ class PacienteSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "nome",
+            "email",
             "cpf",
             "telefone",
             "data_nascimento",
-            "data_cadastro",
             "convenio",
+            "data_cadastro",
+            "atualizado_em"
         ]
         depth = 1
-        read_only_fields = ["id", "data_cadastro"]
+        read_only_fields = ["id", "data_cadastro", "atualizado_em"]
 
     def create(self, validated_data):
         now = timezone.now()
