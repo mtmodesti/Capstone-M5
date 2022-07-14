@@ -1,20 +1,19 @@
-from convenios.models import Convenio
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from .models import Paciente
+from .permissions import isSuperuserOrStaff
 from .serializers import PacienteSerializer
-from .permissions import isSuperUserOrStaff, isSuperUserOrStaffOrOwner
 
 
 class ListCreatePacienteView(ListCreateAPIView):
-    permission_classes = [isSuperUserOrStaff]
+    permission_classes = [isSuperuserOrStaff]
 
     queryset = Paciente.objects.all()
     serializer_class = PacienteSerializer
 
 
 class RetrieveUpdateDestroyPacienteView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [isSuperUserOrStaffOrOwner]
+    permission_classes = [isSuperuserOrStaff]
 
     queryset = Paciente.objects.all()
     serializer_class = PacienteSerializer
