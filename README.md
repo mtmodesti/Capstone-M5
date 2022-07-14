@@ -44,14 +44,13 @@ Paginação de 20 itens por visualização
 POST
 BASE_URL/pacientes
 Permissão: Usuário / Admin
+
 POST - BASE_URL/pacientes (criar paciente / capturado por token)
 
 
 ```
 
 Request.body = {
-
-req.body = {
 "nome":"string",
 "cpf":"string",
 "telefone":"string",
@@ -59,6 +58,7 @@ req.body = {
 "convenio":"string" - Default "particular"
 }
 ```
+
 
 ```
 Response = {
@@ -71,15 +71,16 @@ id = "read_only",
 }
 ```
 
+
 Status: 201
 
 GET POR ID
 BASE_URL/pacientes/<paciente_id> (capturar paciente por id)
 Permissão: Usuário / Admin / Médico
 
+
 ```
 Response = {
-
 id = "read_only",
 "nome":"string",
 "telefone":"string",
@@ -97,9 +98,9 @@ GET
 BASE_URL/pacientes (listar todos pacientes)
 Permissão: Usuário / Admin / Médico
 
+
 ```
 Response = [{
-
 res.body = [{
 id = "read_only",
 "nome":"string",
@@ -108,6 +109,7 @@ id = "read_only",
 "convenio":"string",
 "data_cadastro":"DATETIME.NOW",
 },...]
+
 ```
 
 Status: 200
@@ -120,6 +122,7 @@ Permissão: Atendente / Admin
 
 ```
 Req.body = {
+
 "nome":"string",
 "cpf":"string",
 "telefone":"string",
@@ -146,6 +149,7 @@ POST - BASE_URL/consultas/<paciente_id> - criar consulta
 Permissão: Usuário / Admin
 
 PS: capturar user id pelo token do usuario id
+
 
 ```
 Req.body = {
@@ -196,8 +200,10 @@ status: 200
 
 DELETE
 BASE_URL/consultas/<id>
+
 permissões = ADMIN, Usuário
 ```
+
 req.body = {}
 ```
 
@@ -247,6 +253,7 @@ res.body = {
 }
 ```
 
+
 status: 200
 
 ## Convênio
@@ -259,6 +266,7 @@ permissões = Admin, Usuário
 
 req.body = {}
 
+
 ```
 Res.body = {
 "id":"string",
@@ -266,17 +274,21 @@ Res.body = {
 }
 ```
 
+
 Status: 200
 
 POST:
 BASE_URL/convenios
 permissões = Admin
 
+
 ```
 Req.body = {
+
 "tipo":"string"
 }
 ```
+
 
 ```
 Res.body = {
@@ -285,17 +297,21 @@ Res.body = {
 }
 ```
 
+
 status 201
 
 PATCH:
 BASE_URL/convenios/<id>
 permissões = Admin
 
+
 ```
 Req.body{
+
 "tipo":"string"
 }
 ```
+
 
 ```
 Res.body = {
@@ -303,15 +319,18 @@ Res.body = {
 }
 ```
 
+
 status: 200
 
 DELETE:
 BASE_URL/convenios/delete/<id>
 permissões = Admin
 
+
 ```
 Req.body = {}
 ```
+
 
 status: 204
 
@@ -322,12 +341,14 @@ GET:
 BASE_URL/medicos
 permissões: Admin, Usuário
 
+
 ```
 Req.body = {}
 ```
 
 ```
 Res.body = [{
+
 "id":"string",
 "nome":"string",
 "especialidade":"string",
@@ -345,6 +366,7 @@ GET POR ID
 BASE_URL/medicos/<id>
 permissões: Admin, Usuário
 
+
 req.body = {}
 
 ```
@@ -358,12 +380,15 @@ res.body = {
 "ativo":"BOOLEAN",
 "registro_profissional":"string",
 }
+
 ```
+
 
 Status: 200
 
 POST:
 Permissões: Admin
+
 
 ```
 Req.body = {
@@ -375,6 +400,7 @@ Req.body = {
 "especialidade":"string",
 }
 ```
+
 
 ```
 Res.body =
@@ -399,6 +425,7 @@ status: 204
 PATCH:
 Permissões: Admin
 
+
 ```
 Req.body = {
 "nome":"string",
@@ -409,6 +436,7 @@ Req.body = {
 "especialidade":"string",
 }
 ```
+
 
 ```
 Res.body = {Voltar usuário atualizado com dados não sensíveis}
@@ -422,9 +450,11 @@ status: 200
 GET - Listar todos usuários
 permissões = Admin
 BASE_URL/usuarios
+
 Req.body = {}
 ```
 Res.body = [{
+
 "id":"string",
 "nome":"string",
 "email":"string",
@@ -439,8 +469,10 @@ GET POR ID
 BASE_URL/usuarios/<id>
 permissões = Admin
 
+
 ```
 Res.body = {
+
 "id":"string",
 "email":"string",
 "nome":"string",
@@ -460,13 +492,16 @@ POST
 BASE_URL/usuarios
 permissões = Admin
 
+
 ```
 Req.body = {
+
 "nome":"string",
 "email":"string",
 "senha":"string",
 }
 ```
+
 
 ```
 Res.body = {
@@ -480,6 +515,7 @@ UPDATE
 BASE_URL/usuarios/<id>
 permissões = Admin
 
+
 ```
 Req.body = {
 "email":"string",
@@ -490,9 +526,11 @@ Req.body = {
 ```
 
 
+
 ```
 Res.body = {"Usuário atualizado"}
 ```
+
 
 status: 201
 
@@ -540,6 +578,7 @@ POST
 BASE_URL/agendas
 Permissões: Admin, Usuário
 
+
 ```
 req.body = {
 "consulta_id":"string",
@@ -563,13 +602,13 @@ PATCH
 BASE_URL/agendas/<id>
 Permissões: Admin, Usuário
 
+
 Permissões: ADMIN, Usuário
 
 
 
 ```
 req.body =  {
-
 "consulta_id":"string",
 "medico_id":""string,
 "data_consulta":"DATETIMEFIELD",
