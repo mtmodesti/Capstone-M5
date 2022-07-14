@@ -2,6 +2,8 @@ from pacientes.models import Paciente
 from rest_framework import generics
 from rest_framework.reverse import reverse
 
+from usuarios.permissions import isSuperUserOrStaff
+
 from .models import Consulta
 from .serializers import ConsultaSerializer
 
@@ -12,6 +14,7 @@ class ListConsultaView(generics.ListAPIView):
 
 
 class CreateConsultaView(generics.CreateAPIView):
+    permission_classes = [isSuperUserOrStaff]
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
 
@@ -23,5 +26,6 @@ class CreateConsultaView(generics.CreateAPIView):
         )
 
 class RetrieveUpdateDestroyConsultaView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [isSuperUserOrStaff]
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
