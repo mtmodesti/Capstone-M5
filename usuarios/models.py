@@ -1,8 +1,9 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.utils import timezone
 from usuarios.utils import UsuarioCustomizado
+
 
 # Create your models here.
 class Usuario(AbstractUser):
@@ -10,7 +11,8 @@ class Usuario(AbstractUser):
     nome = models.CharField(max_length=255)
     agente_de_saude = models.BooleanField(default=False)
     email = models.EmailField(max_length=255, unique=True)
-    
+    criado_em = models.DateTimeField(default=timezone.now)
+    atualizado_em = models.DateTimeField(auto_now=True)
     username = None
     
     REQUIRED_FIELDS = ["nome"]

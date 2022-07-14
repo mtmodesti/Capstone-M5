@@ -1,8 +1,9 @@
 from django.urls import path
 
-from .views import ListCreateConsultaView, RetrieveUpdateDestroyConsultaView
+from consultas import views
 
 urlpatterns = [
-    path('<paciente_id>/', ListCreateConsultaView.as_view()),
-    path('<pk>/', RetrieveUpdateDestroyConsultaView.as_view())
+    path('', views.ListConsultaView.as_view()),
+    path('medico/<medico_id>/paciente/<paciente_id>/', views.CreateConsultaView.as_view()),
+    path('<pk>/', views.RetrieveUpdateDestroyConsultaView.as_view())
 ]
