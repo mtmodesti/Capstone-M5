@@ -42,7 +42,6 @@ class ConsultaSerializer(ModelSerializer):
             usuario=usuario,
             medico=medico
         )
-        # ipdb.set_trace()
         Agenda.objects.create(data_consulta=validated_data['data_da_consulta'], medico=medico, consulta=consulta)
         return consulta
         
