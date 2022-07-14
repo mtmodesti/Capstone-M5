@@ -6,7 +6,6 @@ from .serializers import RetrieveUpdateDestroySerializer
 from .mixins import SerializeByMethodMixin
 from convenios.permissions import isSuperUser
 from usuarios.permissions import isSuperUserOrStaff
-import ipdb
 
 
 class RetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):

@@ -1,6 +1,5 @@
 from django.contrib.auth.models import BaseUserManager
 from medicos.models import Medico
-import ipdb
 
 class UsuarioCustomizado(BaseUserManager):
     

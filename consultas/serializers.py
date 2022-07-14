@@ -5,7 +5,6 @@ from medicos.models import Medico
 from pacientes.models import Paciente
 from rest_framework.serializers import ModelSerializer
 from usuarios.models import Usuario
-import ipdb
 from .models import Consulta
 
 
