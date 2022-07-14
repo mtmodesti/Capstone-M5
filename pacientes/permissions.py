@@ -1,27 +1,15 @@
 from rest_framework import permissions
 
 
-class isSuperUserOrStaffOrOwner(permissions.BasePermission):
-    def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            if obj == request.user:
-                return True
-            if request.user.is_staff:
-                return True
-
-        if request.user.is_superuser:
-            return True
-
-        return False
-
-
-class isSuperUserOrStaff(permissions.BasePermission):
+class isSuperuserOrStaff(permissions.BasePermission):
     def has_permission(self, request, view):
-        if request.method in permissions.SAFE_METHODS:
-            if request.user.is_staff:
-                return True
-
-        if request.user.is_superuser:
+        print(request.method)
+        if request.user.is_superuser or request.user.is_staff:
+            if request.method == "DELETE":
+                if request.user.is_superuser:
+                    return True
+                else:
+                    return False
             return True
 
         return False
