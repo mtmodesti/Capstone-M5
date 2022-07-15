@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','clinica_.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','clinika-capstone-m5.herokuapp.com']
 
 
 # Application definition
@@ -111,6 +111,7 @@ if DATABASE_URL:
         ssl_require=True
     )
     DATABASES['default'].update(db_from_env)
+    DEBUG = False
 
 
 # Password validation
