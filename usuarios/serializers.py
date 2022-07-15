@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from .models import Usuario
 from medicos.models import Medico
-import ipdb
 
 
 class UsuarioSerializer(serializers.ModelSerializer):

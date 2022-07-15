@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'medicos',
 ]
 
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -142,6 +145,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "usuarios.Usuario"
 
 REST_FRAMEWORK = {
+    'DATE_INPUT_FORMATS': [("%d-%m-%Y %H:%M"),],
     "DEFAULT_AUTHENTICATION_CLASSES": (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )

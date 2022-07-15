@@ -15,10 +15,6 @@ iniconfig==1.1.1
 ipdb==0.13.9
 ipython==8.4.0
 jedi==0.18.1
-<<<<<<< HEAD
-
-=======
->>>>>>> e91f92752d25cca66d92fbb14f77088be26d0f5b
 matplotlib-inline==0.1.3
 mypy-extensions==0.4.3
 packaging==21.3

@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from usuarios.serializers import ChangeActivePropertySerializer, UsuarioSerializer, UsuarioMedicoSerializer, UsuarioProfileSerializer
 from .models import Usuario
 from rest_framework_simplejwt.authentication import JWTAuthentication
-import ipdb
 
 ## views para usuários em geral
 class ListCreateUsuarioView(generics.ListCreateAPIView):
