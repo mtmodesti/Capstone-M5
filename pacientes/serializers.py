@@ -1,3 +1,4 @@
+from django.forms import ValidationError
 from django.utils import timezone
 from rest_framework import serializers
 
@@ -24,3 +25,8 @@ class PacienteSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         now = timezone.now()
         return Paciente.objects.create(**validated_data, data_cadastro=now)
+    
+    def validate_cpf(self, value):
+        if len(value) != 11:
+            raise ValidationError("Cpf precisa ter 11 caracteres")
+        return value

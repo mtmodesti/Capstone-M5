@@ -16,7 +16,6 @@ class Consulta(models.Model):
     confirmado       = models.BooleanField(default=False)
     compareceu       = models.BooleanField(default=False)
     pago             = models.BooleanField(default=False)
-    data_da_consulta = models.DateField(blank=True, default=timezone.now )
+    data_da_consulta = models.DateTimeField(blank=True, default=timezone.now)
     criado_em        = models.DateTimeField(default=timezone.now)
     atualizado_em    = models.DateTimeField(auto_now=True)
-
