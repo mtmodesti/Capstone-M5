@@ -11,7 +11,7 @@ from .models import Consulta
 
 class ConsultaSerializer(serializers.ModelSerializer):
 
-    data_da_consulta = serializers.DateField(input_formats=['%d-%m-%Y %H:%M',])
+    data_da_consulta = serializers.DateTimeField(input_formats=['%d-%m-%Y %H:%M',])
 
     class Meta:
         model  = Consulta
