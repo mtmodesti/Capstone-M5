@@ -8,7 +8,7 @@ class MedicoSerializer(serializers.ModelSerializer):
     agenda = AgendaSerializer(read_only=True, many=True)
     class Meta:
         model = Medico
-        fields = ['especialidade', 'telefone','registro_profissional', 'ativo', 'id', 'agenda']
+        fields = ['id', 'especialidade', 'telefone','registro_profissional', 'ativo', 'agenda']
         extra_kwargs = {
             "agenda": {"read_only": True},
         }
