@@ -2,7 +2,6 @@ from django.forms import ValidationError
 from .models import Convenio
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-import ipdb
 
 
 class RetrieveUpdateDestroySerializer(serializers.ModelSerializer):

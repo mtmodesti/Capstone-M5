@@ -4,12 +4,15 @@ from django.shortcuts import get_object_or_404
 from medicos.models import Medico
 from pacientes.models import Paciente
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from usuarios.models import Usuario
-import ipdb
 from .models import Consulta
 
 
-class ConsultaSerializer(ModelSerializer):
+class ConsultaSerializer(serializers.ModelSerializer):
+
+    data_da_consulta = serializers.DateField(input_formats=['%d-%m-%Y %H:%M',])
+
     class Meta:
         model  = Consulta
         fields = "__all__"
@@ -19,12 +22,11 @@ class ConsultaSerializer(ModelSerializer):
             "paciente",
             "medico",
             "criado_em",
-            "atualizado_em"
+            "atualizado_em",
         ]
 
 
     def create(self, validated_data: dict):
-
         paciente_id = validated_data.pop("paciente")
         # convenio_data = validated_data.pop("convenio")
         usuario_data = validated_data.pop("usuario")
