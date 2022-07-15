@@ -11,7 +11,7 @@ class Usuario(AbstractUser):
     nome = models.CharField(max_length=255)
     agente_de_saude = models.BooleanField(default=False)
     email = models.EmailField(max_length=255, unique=True)
-    criado_em = models.DateTimeField(default=timezone.now)
+    criado_em = models.DateTimeField(default=timezone.now,  )
     atualizado_em = models.DateTimeField(auto_now=True)
     username = None
     

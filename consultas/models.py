@@ -1,4 +1,7 @@
+from turtle import back
 import uuid
+from django import forms
+from django.forms import DateField
 from django.utils import timezone
 from django.db import models
 
@@ -13,7 +16,7 @@ class Consulta(models.Model):
     confirmado       = models.BooleanField(default=False)
     compareceu       = models.BooleanField(default=False)
     pago             = models.BooleanField(default=False)
-    data_da_consulta = models.CharField(max_length=100)
+    data_da_consulta = models.DateField(blank=True, default=timezone.now )
     criado_em        = models.DateTimeField(default=timezone.now)
     atualizado_em    = models.DateTimeField(auto_now=True)
 

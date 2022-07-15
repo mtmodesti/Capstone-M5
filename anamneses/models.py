@@ -8,6 +8,6 @@ import uuid
 class Anamnese(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     descricao = models.CharField(max_length=255)
-    criado_em = models.DateTimeField(default=timezone.now)
+    criado_em = models.DateTimeField(default=timezone.now, editable=False)
     
     paciente = models.ForeignKey("pacientes.Paciente", on_delete=models.CASCADE, related_name="anamnese")
