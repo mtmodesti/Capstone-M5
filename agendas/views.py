@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
-# Create your views here.
+from .models import Agenda
+from .permissions import isSuperUserOrStaffOrOwner
+from .serializers import AgendaSerializer
+
+
+class ListCreateAgendaView(ListCreateAPIView):
+    # pagination_class = [isSuperUserOrStaffOrOwner]
+    permission_classes = [isSuperUserOrStaffOrOwner]
+    queryset = Agenda.objects.all()
+    serializer_class = AgendaSerializer
+
+
+class RetrieveUpdateDestroyAgendaView(RetrieveUpdateDestroyAPIView):
+    # pagination_class = [isSuperUserOrStaffOrOwner]
+    permission_classes = [isSuperUserOrStaffOrOwner]
+
+    queryset = Agenda.objects.all()
+    serializer_class = AgendaSerializer
+
+    lookup_url_kwarg = "agenda_id"
