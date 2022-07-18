@@ -1,4 +1,5 @@
 from rest_framework import generics
+from medicos.models import Medico
 from usuarios.permissions import isSuperUser, isSuperUserOrStaff, isSuperUserOrOwner
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
@@ -6,6 +7,8 @@ from rest_framework.response import Response
 from usuarios.serializers import ChangeActivePropertySerializer, UsuarioSerializer, UsuarioMedicoSerializer, UsuarioProfileSerializer
 from .models import Usuario
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from medicos.serializers import MedicoSerializer
+
 
 ## views para usuários em geral
 class ListCreateUsuarioView(generics.ListCreateAPIView):
@@ -21,7 +24,7 @@ class RetrieveUpdateDestroyUsuarioView(generics.RetrieveUpdateDestroyAPIView):
 
 
 ## Views para agentes de saúde - para super users ou atendentes
-class ListCreateHealthAgentView(generics.ListCreateAPIView):
+class CreateHealthAgentView(generics.CreateAPIView):
     permission_classes = [isSuperUserOrStaff]
     queryset = Usuario.objects.all()
     serializer_class = UsuarioMedicoSerializer
@@ -29,15 +32,18 @@ class ListCreateHealthAgentView(generics.ListCreateAPIView):
     def get_queryset(self):
         return Usuario.objects.filter(agente_de_saude=True)
 
+
+class ListHealthAgentView(generics.ListAPIView):
+    permission_classes = [isSuperUserOrStaff]
+    queryset = Medico.objects.all()
+    serializer_class = MedicoSerializer
 
 
 class RetrieveUpdateDeleteHealthAgentView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [isSuperUserOrStaff]
-    queryset = Usuario.objects.all()
-    serializer_class = UsuarioMedicoSerializer
+    queryset = Medico.objects.all()
+    serializer_class = MedicoSerializer
 
-    def get_queryset(self):
-        return Usuario.objects.filter(agente_de_saude=True)
 
 
 ## Mostra o perfil do usuário

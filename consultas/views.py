@@ -25,6 +25,14 @@ class CreateConsultaView(generics.CreateAPIView):
             medico=self.kwargs["medico_id"]
         )
 
+class FiltrarConsultaMedicoView(generics.ListAPIView):
+    queryset = Consulta.objects.all()
+    serializer_class = ConsultaSerializer
+
+    def get_queryset(self):
+        return Consulta.objects.filter(medico=self.kwargs['medico_id'])
+
+
 class RetrieveUpdateDestroyConsultaView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [isSuperUserOrStaff]
     queryset = Consulta.objects.all()
