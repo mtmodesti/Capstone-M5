@@ -4,7 +4,12 @@ from usuarios.permissions import isSuperUser, isSuperUserOrStaff, isSuperUserOrO
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from usuarios.serializers import ChangeActivePropertySerializer, UsuarioSerializer, UsuarioMedicoSerializer, UsuarioProfileSerializer
+from usuarios.serializers import (
+    ChangeActivePropertySerializer,
+    UsuarioSerializer,
+    UsuarioMedicoSerializer,
+    UsuarioProfileSerializer,
+)
 from .models import Usuario
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from medicos.serializers import MedicoSerializer
@@ -45,13 +50,12 @@ class RetrieveUpdateDeleteHealthAgentView(generics.RetrieveUpdateDestroyAPIView)
     serializer_class = MedicoSerializer
 
 
-
 ## Mostra o perfil do usuário
 class ShowProfileView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Usuario.objects.all()
     serializer_class = UsuarioProfileSerializer
-    
+
     def get_object(self):
         return self.request.user
 
