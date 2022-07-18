@@ -10,10 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-import dotenv
-from pathlib import Path
 from datetime import timedelta
+from pathlib import Path
 
+import dj_database_url
+import dotenv
 
 dotenv.load_dotenv()
 
@@ -30,7 +31,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','clinika-capstone-m5.herokuapp.com']
 
 
 # Application definition
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_spectacular',
     'usuarios',
     'agendas',
     'convenios',
@@ -52,7 +54,7 @@ INSTALLED_APPS = [
     'medicos',
 ]
 
-DATE_INPUT_FORMATS = ['%d-%m-%Y']
+DATE_INPUT_FORMATS = ['%d-%m-%Y %H:%M']
 
 
 MIDDLEWARE = [
@@ -101,6 +103,18 @@ DATABASES = {
 }
 
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    db_from_env = dj_database_url.config(
+        default=DATABASE_URL,
+        conn_max_age=500,
+        ssl_require=True
+    )
+    DATABASES['default'].update(db_from_env)
+    DEBUG = False
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -125,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -146,11 +160,22 @@ AUTH_USER_MODEL = "usuarios.Usuario"
 
 REST_FRAMEWORK = {
     'DATE_INPUT_FORMATS': [("%d-%m-%Y %H:%M"),],
+    'DATETIME_FORMAT': "%d-%m-%Y %H:%M",
+    'DEFAULT_SCHEMA_CLASS':'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_AUTHENTICATION_CLASSES": (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 20,
 }
 
+
+SPECTACULAR_SETTINGS = {
+    'TITLE':'Clinica Médica',
+    'DESCRIPTION':'Api da clinica médica',
+    'VERSION':'1.0.0',
+    'SERVE_INCLUDE_SCHEMA':False,
+}
 
 
 SIMPLE_JWT = {

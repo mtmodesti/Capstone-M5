@@ -6,14 +6,15 @@ from .serializers import AgendaSerializer
 
 
 class ListCreateAgendaView(ListCreateAPIView):
-    pagination_class = [isSuperUserOrStaffOrOwner]
-
+    # pagination_class = [isSuperUserOrStaffOrOwner]
+    permission_classes = [isSuperUserOrStaffOrOwner]
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
 
 
 class RetrieveUpdateDestroyAgendaView(RetrieveUpdateDestroyAPIView):
-    pagination_class = [isSuperUserOrStaffOrOwner]
+    # pagination_class = [isSuperUserOrStaffOrOwner]
+    permission_classes = [isSuperUserOrStaffOrOwner]
 
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer

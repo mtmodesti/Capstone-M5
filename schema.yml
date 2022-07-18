@@ -1,0 +1,1902 @@
+openapi: 3.0.3
+info:
+  title: Clinica Médica
+  version: 1.0.0
+  description: Api da clinica médica
+paths:
+  /api/agendas:
+    get:
+      operationId: api_agendas_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agenda'
+          description: ''
+    post:
+      operationId: api_agendas_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agenda'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Agenda'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Agenda'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agenda'
+          description: ''
+  /api/agendas/{agenda_id}:
+    get:
+      operationId: api_agendas_retrieve
+      parameters:
+      - in: path
+        name: agenda_id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this agenda.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agenda'
+          description: ''
+    put:
+      operationId: api_agendas_update
+      parameters:
+      - in: path
+        name: agenda_id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this agenda.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agenda'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Agenda'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Agenda'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agenda'
+          description: ''
+    patch:
+      operationId: api_agendas_partial_update
+      parameters:
+      - in: path
+        name: agenda_id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this agenda.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAgenda'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAgenda'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAgenda'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agenda'
+          description: ''
+    delete:
+      operationId: api_agendas_destroy
+      parameters:
+      - in: path
+        name: agenda_id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this agenda.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/anamneses/:
+    get:
+      operationId: api_anamneses_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Anamnese'
+          description: ''
+  /api/anamneses/{id}/:
+    get:
+      operationId: api_anamneses_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this anamnese.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Anamnese'
+          description: ''
+    put:
+      operationId: api_anamneses_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this anamnese.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Anamnese'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Anamnese'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Anamnese'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Anamnese'
+          description: ''
+    patch:
+      operationId: api_anamneses_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this anamnese.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAnamnese'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAnamnese'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAnamnese'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Anamnese'
+          description: ''
+    delete:
+      operationId: api_anamneses_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this anamnese.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/anamneses/criar/{paciente_id}/:
+    post:
+      operationId: api_anamneses_criar_create
+      parameters:
+      - in: path
+        name: paciente_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Anamnese'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Anamnese'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Anamnese'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Anamnese'
+          description: ''
+  /api/consultas/:
+    get:
+      operationId: api_consultas_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Consulta'
+          description: ''
+  /api/consultas/{id}/:
+    get:
+      operationId: api_consultas_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this consulta.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Consulta'
+          description: ''
+    put:
+      operationId: api_consultas_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this consulta.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Consulta'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Consulta'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Consulta'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Consulta'
+          description: ''
+    patch:
+      operationId: api_consultas_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this consulta.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedConsulta'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedConsulta'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedConsulta'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Consulta'
+          description: ''
+    delete:
+      operationId: api_consultas_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this consulta.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/consultas/medico/{medico_id}/paciente/{paciente_id}/:
+    post:
+      operationId: api_consultas_medico_paciente_create
+      parameters:
+      - in: path
+        name: medico_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: paciente_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Consulta'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Consulta'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Consulta'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Consulta'
+          description: ''
+  /api/convenio/{id}/paciente/{paciente_id}/:
+    put:
+      operationId: api_convenio_paciente_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this convenio.
+        required: true
+      - in: path
+        name: paciente_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RetrieveUpdateDestroy'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          description: ''
+    patch:
+      operationId: api_convenio_paciente_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this convenio.
+        required: true
+      - in: path
+        name: paciente_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRetrieveUpdateDestroy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRetrieveUpdateDestroy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRetrieveUpdateDestroy'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          description: ''
+  /api/convenios/:
+    get:
+      operationId: api_convenios_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          description: ''
+    post:
+      operationId: api_convenios_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RetrieveUpdateDestroy'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          description: ''
+  /api/convenios/{id}/:
+    get:
+      operationId: api_convenios_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this convenio.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          description: ''
+    put:
+      operationId: api_convenios_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this convenio.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RetrieveUpdateDestroy'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          description: ''
+    patch:
+      operationId: api_convenios_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this convenio.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRetrieveUpdateDestroy'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRetrieveUpdateDestroy'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRetrieveUpdateDestroy'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveUpdateDestroy'
+          description: ''
+    delete:
+      operationId: api_convenios_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this convenio.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/login/:
+    post:
+      operationId: api_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/pacientes/:
+    get:
+      operationId: api_pacientes_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Paciente'
+          description: ''
+    post:
+      operationId: api_pacientes_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Paciente'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Paciente'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Paciente'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paciente'
+          description: ''
+  /api/pacientes/{paciente_id}/:
+    get:
+      operationId: api_pacientes_retrieve
+      parameters:
+      - in: path
+        name: paciente_id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this paciente.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paciente'
+          description: ''
+    put:
+      operationId: api_pacientes_update
+      parameters:
+      - in: path
+        name: paciente_id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this paciente.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Paciente'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Paciente'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Paciente'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paciente'
+          description: ''
+    patch:
+      operationId: api_pacientes_partial_update
+      parameters:
+      - in: path
+        name: paciente_id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this paciente.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPaciente'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPaciente'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPaciente'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paciente'
+          description: ''
+    delete:
+      operationId: api_pacientes_destroy
+      parameters:
+      - in: path
+        name: paciente_id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this paciente.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/usuario/ativar-desativar/{id}/:
+    put:
+      operationId: api_usuario_ativar_desativar_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeActiveProperty'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ChangeActiveProperty'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ChangeActiveProperty'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeActiveProperty'
+          description: ''
+    patch:
+      operationId: api_usuario_ativar_desativar_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedChangeActiveProperty'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedChangeActiveProperty'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedChangeActiveProperty'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangeActiveProperty'
+          description: ''
+  /api/usuario/medico/:
+    get:
+      operationId: api_usuario_medico_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UsuarioMedico'
+          description: ''
+    post:
+      operationId: api_usuario_medico_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioMedico'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UsuarioMedico'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UsuarioMedico'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioMedico'
+          description: ''
+  /api/usuario/medico/{id}/:
+    get:
+      operationId: api_usuario_medico_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioMedico'
+          description: ''
+    put:
+      operationId: api_usuario_medico_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioMedico'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UsuarioMedico'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UsuarioMedico'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioMedico'
+          description: ''
+    patch:
+      operationId: api_usuario_medico_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUsuarioMedico'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUsuarioMedico'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUsuarioMedico'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioMedico'
+          description: ''
+    delete:
+      operationId: api_usuario_medico_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/usuario/profile/:
+    get:
+      operationId: api_usuario_profile_retrieve
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioProfile'
+          description: ''
+  /api/usuarios/:
+    get:
+      operationId: api_usuarios_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+          description: ''
+    post:
+      operationId: api_usuarios_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+          description: ''
+  /api/usuarios/{id}/:
+    get:
+      operationId: api_usuarios_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+          description: ''
+    put:
+      operationId: api_usuarios_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+          description: ''
+    patch:
+      operationId: api_usuarios_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUsuario'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUsuario'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUsuario'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+          description: ''
+    delete:
+      operationId: api_usuarios_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        description: A unique value identifying this user.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Agenda:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        data_consulta:
+          type: string
+          maxLength: 100
+        consulta_id:
+          type: string
+          maxLength: 125
+        medico_id:
+          type: string
+          maxLength: 125
+      required:
+      - consulta_id
+      - data_consulta
+      - id
+      - medico_id
+    Anamnese:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        descricao:
+          type: string
+          maxLength: 255
+        criado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        paciente:
+          allOf:
+          - $ref: '#/components/schemas/Paciente'
+          readOnly: true
+      required:
+      - criado_em
+      - descricao
+      - id
+      - paciente
+    ChangeActiveProperty:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 255
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        nome:
+          type: string
+          maxLength: 255
+        agente_de_saude:
+          type: boolean
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        criado_em:
+          type: string
+          format: date-time
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
+      required:
+      - atualizado_em
+      - email
+      - nome
+      - password
+    Consulta:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        data_da_consulta:
+          type: string
+          format: date-time
+        confirmado:
+          type: boolean
+        compareceu:
+          type: boolean
+        pago:
+          type: boolean
+        criado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        paciente:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        usuario:
+          type: string
+          readOnly: true
+        medico:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - atualizado_em
+      - criado_em
+      - data_da_consulta
+      - id
+      - medico
+      - paciente
+      - usuario
+    Medico:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        especialidade:
+          type: string
+          maxLength: 127
+        telefone:
+          type: string
+          maxLength: 127
+        registro_profissional:
+          type: string
+          maxLength: 127
+        ativo:
+          type: boolean
+        agenda:
+          type: array
+          items:
+            $ref: '#/components/schemas/Agenda'
+          readOnly: true
+      required:
+      - agenda
+      - especialidade
+      - id
+      - telefone
+    Nested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tipo:
+          type: string
+          maxLength: 127
+      required:
+      - id
+      - tipo
+    Paciente:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          nullable: true
+          maxLength: 255
+        cpf:
+          type: string
+          maxLength: 11
+        telefone:
+          type: string
+          maxLength: 30
+        data_nascimento:
+          type: string
+          format: date-time
+        convenio:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        data_cadastro:
+          type: string
+          format: date-time
+          readOnly: true
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - atualizado_em
+      - convenio
+      - cpf
+      - data_cadastro
+      - data_nascimento
+      - id
+      - nome
+      - telefone
+    PatchedAgenda:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        data_consulta:
+          type: string
+          maxLength: 100
+        consulta_id:
+          type: string
+          maxLength: 125
+        medico_id:
+          type: string
+          maxLength: 125
+    PatchedAnamnese:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        descricao:
+          type: string
+          maxLength: 255
+        criado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        paciente:
+          allOf:
+          - $ref: '#/components/schemas/Paciente'
+          readOnly: true
+    PatchedChangeActiveProperty:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 255
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        nome:
+          type: string
+          maxLength: 255
+        agente_de_saude:
+          type: boolean
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        criado_em:
+          type: string
+          format: date-time
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
+    PatchedConsulta:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        data_da_consulta:
+          type: string
+          format: date-time
+        confirmado:
+          type: boolean
+        compareceu:
+          type: boolean
+        pago:
+          type: boolean
+        criado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        paciente:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        usuario:
+          type: string
+          readOnly: true
+        medico:
+          type: string
+          format: uuid
+          readOnly: true
+    PatchedPaciente:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          nullable: true
+          maxLength: 255
+        cpf:
+          type: string
+          maxLength: 11
+        telefone:
+          type: string
+          maxLength: 30
+        data_nascimento:
+          type: string
+          format: date-time
+        convenio:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        data_cadastro:
+          type: string
+          format: date-time
+          readOnly: true
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedRetrieveUpdateDestroy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tipo:
+          type: string
+          maxLength: 127
+    PatchedUsuario:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 255
+        nome:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        criado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedUsuarioMedico:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        especialidade:
+          type: string
+          writeOnly: true
+        telefone:
+          type: string
+          writeOnly: true
+        medico:
+          allOf:
+          - $ref: '#/components/schemas/Medico'
+          readOnly: true
+        registro_profissional:
+          type: string
+          writeOnly: true
+        criado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+    RetrieveUpdateDestroy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        tipo:
+          type: string
+          maxLength: 127
+      required:
+      - id
+      - tipo
+    TokenObtainPair:
+      type: object
+      properties:
+        email:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - email
+      - password
+      - refresh
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 255
+        nome:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        criado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - atualizado_em
+      - criado_em
+      - email
+      - nome
+      - password
+    UsuarioMedico:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        especialidade:
+          type: string
+          writeOnly: true
+        telefone:
+          type: string
+          writeOnly: true
+        medico:
+          allOf:
+          - $ref: '#/components/schemas/Medico'
+          readOnly: true
+        registro_profissional:
+          type: string
+          writeOnly: true
+        criado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - atualizado_em
+      - criado_em
+      - email
+      - especialidade
+      - id
+      - medico
+      - nome
+      - password
+      - registro_profissional
+      - telefone
+    UsuarioProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 255
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        nome:
+          type: string
+          maxLength: 255
+        agente_de_saude:
+          type: boolean
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        criado_em:
+          type: string
+          format: date-time
+        atualizado_em:
+          type: string
+          format: date-time
+          readOnly: true
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
+      required:
+      - atualizado_em
+      - email
+      - nome
+      - password
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
