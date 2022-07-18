@@ -22,3 +22,16 @@ class MedicoSerializer(serializers.ModelSerializer):
             "agenda": {"read_only": True},
         }
 
+
+class MedicoConsultaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Medico
+        fields = [
+            'id',
+            'nome',
+            'email',
+            'especialidade',
+            'telefone',
+            'registro_profissional'
+        ]
+
