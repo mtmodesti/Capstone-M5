@@ -5,7 +5,7 @@ from rest_framework.serializers import ModelSerializer
 
 
 class MedicoSerializer(serializers.ModelSerializer):
-    agenda = AgendaSerializer(read_only=True, many=True)
+    # agenda = AgendaSerializer(read_only=True, many=True)
     class Meta:
         model = Medico
         fields = [
@@ -16,7 +16,7 @@ class MedicoSerializer(serializers.ModelSerializer):
             'telefone',
             'registro_profissional',
             'ativo',
-            'agenda',
+            # 'agenda',
         ]
         extra_kwargs = {
             "agenda": {"read_only": True},
