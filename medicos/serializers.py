@@ -8,8 +8,30 @@ class MedicoSerializer(serializers.ModelSerializer):
     agenda = AgendaSerializer(read_only=True, many=True)
     class Meta:
         model = Medico
-        fields = ['id', 'especialidade', 'telefone','registro_profissional', 'ativo', 'agenda']
+        fields = [
+            'id',
+            'nome',
+            'email',
+            'especialidade',
+            'telefone',
+            'registro_profissional',
+            'ativo',
+            'agenda',
+        ]
         extra_kwargs = {
             "agenda": {"read_only": True},
         }
+
+
+class MedicoConsultaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Medico
+        fields = [
+            'id',
+            'nome',
+            'email',
+            'especialidade',
+            'telefone',
+            'registro_profissional'
+        ]
 

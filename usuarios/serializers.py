@@ -76,6 +76,8 @@ class UsuarioMedicoSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         medico_data = {
+            "nome": validated_data['nome'],
+            "email": validated_data['email'],
             "especialidade": validated_data.pop("especialidade"),
             "registro_profissional": validated_data.pop("registro_profissional"),
             "telefone": validated_data.pop("telefone"),
@@ -125,3 +127,10 @@ class ChangeActivePropertySerializer(serializers.ModelSerializer):
         instance.is_active = validated_data.get("is_active", instance.is_active)
         instance.save()
         return instance
+
+
+class ConsultaUsuarioCriadorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = ['nome', 'email']
+
