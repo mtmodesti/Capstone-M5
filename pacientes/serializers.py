@@ -52,3 +52,15 @@ class PacienteConsultaSerializer(serializers.ModelSerializer):
         ]
         depth = 1
         read_only_fields = ["id", "data_cadastro", "atualizado_em"]
+
+
+class PacienteAnamneseSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Paciente
+        fields = [
+            "id",
+            "nome",
+            "email",
+            "cpf",
+            "telefone"
+        ]
