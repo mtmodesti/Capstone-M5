@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from usuarios.permissions import isSuperUserOrStaff
 from django.utils import timezone
@@ -21,8 +22,10 @@ class CreateConsultaView(generics.CreateAPIView):
     serializer_class = ConsultaSerializer
 
     def perform_create(self, serializer):
-        paciente = Paciente.objects.get(pk=self.kwargs["paciente_id"])
-        medico = Medico.objects.get(pk=self.kwargs["medico_id"])
+        paciente = get_object_or_404(Paciente, pk=self.kwargs["paciente_id"])
+        medico = get_object_or_404(Medico, pk=self.kwargs["medico_id"])
+        # paciente = Paciente.objects.get(pk=self.kwargs["paciente_id"])
+        # medico = Medico.objects.get(pk=self.kwargs["medico_id"])
         send_mail(
             subject=f"Consulta - Doutor(a) {medico.nome}",
             message=f"Olá, {paciente.nome}!\n\nEste é um e-mail de confirmação para a sua consulta que está agendada para o dia {serializer.validated_data['data_da_consulta'].strftime('%d/%m/%Y às %H:%M')}.\n\nCaso não seja possível comparecer, por favor, nos avise com o máximo de antecedência!\n\nAtenciosamente, Clinika",
