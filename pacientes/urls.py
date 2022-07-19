@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path("pacientes/", views.ListCreatePacienteView.as_view()),
     path(
-        "pacientes/<paciente_id>/",
+        "pacientes/<uuid:paciente_id>/",
         views.RetrieveUpdateDestroyPacienteView.as_view(),
     ),
 ]
