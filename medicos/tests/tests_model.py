@@ -1,11 +1,10 @@
-from django.db.utils import IntegrityError, DataError
+from django.db.utils import IntegrityError
 from medicos.models import Medico
 from usuarios.models import Usuario
 from django.test import TestCase
-from django.utils import timezone
 
 
-class MedicoTest(TestCase):
+class TestMedicoModel(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         user_data ={
