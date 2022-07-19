@@ -2,23 +2,38 @@ from agendas.models import Agenda
 from convenios.models import Convenio
 from django.shortcuts import get_object_or_404
 from medicos.models import Medico
+from medicos.serializers import MedicoConsultaSerializer
 from pacientes.models import Paciente
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from usuarios.models import Usuario
+from usuarios.serializers import ConsultaUsuarioCriadorSerializer
 from .models import Consulta
+from pacientes.serializers import PacienteConsultaSerializer
 
 
 class ConsultaSerializer(serializers.ModelSerializer):
-
+    criado_pelo_atendente = ConsultaUsuarioCriadorSerializer(source='usuario', read_only=True)
     data_da_consulta = serializers.DateTimeField(input_formats=['%d-%m-%Y %H:%M',])
-
+    paciente = PacienteConsultaSerializer(read_only=True)
+    medico = MedicoConsultaSerializer(read_only=True)
     class Meta:
         model  = Consulta
-        fields = "__all__"
+        fields = [
+            "id",
+            'criado_pelo_atendente',
+            'data_da_consulta',
+            'confirmado',
+            'compareceu',
+            'pago',
+            'paciente',
+            'medico',
+            'criado_em',
+            'atualizado_em',
+        ]
         read_only_fields = [
             "id",
-            "usuario",
+            "criado_pelo_atendente",
             "paciente",
             "medico",
             "criado_em",
@@ -47,3 +62,4 @@ class ConsultaSerializer(serializers.ModelSerializer):
         Agenda.objects.create(data_consulta=validated_data['data_da_consulta'], medico=medico, consulta=consulta)
         return consulta
         
+
