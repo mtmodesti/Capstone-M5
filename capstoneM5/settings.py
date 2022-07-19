@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     'convenios',
     'pacientes',
     'consultas',
-    'anamneses',
     'medicos',
+    'anamneses',
 ]
 
 DATE_INPUT_FORMATS = ['%d-%m-%Y %H:%M']

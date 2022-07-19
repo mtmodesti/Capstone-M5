@@ -7,6 +7,7 @@ from .models import Consulta
 from .serializers import ConsultaSerializer
 
 
+
 class ListConsultaView(generics.ListAPIView):
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
@@ -16,7 +17,7 @@ class CreateConsultaView(generics.CreateAPIView):
     permission_classes = [isSuperUserOrStaff]
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
-
+   
     def perform_create(self, serializer):
         return serializer.save(
             usuario=self.request.user,
@@ -27,7 +28,6 @@ class CreateConsultaView(generics.CreateAPIView):
 class FiltrarConsultaMedicoView(generics.ListAPIView):
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
-
     def get_queryset(self):
         return Consulta.objects.filter(medico=self.kwargs['medico_id'])
 
@@ -42,7 +42,6 @@ class FiltrarConsultasMaisProximasDeAcontecerView(generics.ListAPIView):
     permission_classes = [isSuperUserOrStaff]
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
-    
     def get_queryset(self):
         now = timezone.now()
         queries = Consulta.objects.all()
@@ -57,7 +56,6 @@ class FiltrarConsultasMaisProximasDeAcontecerPorMedicoView(generics.ListAPIView)
     permission_classes = [isSuperUserOrStaff]
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
-    
     def get_queryset(self):
         now = timezone.now()
         queries = Consulta.objects.filter(medico=self.kwargs['medico_id'])
@@ -66,5 +64,4 @@ class FiltrarConsultasMaisProximasDeAcontecerPorMedicoView(generics.ListAPIView)
                 queries = queries.exclude(id=query.id)
 
         return queries.order_by('data_da_consulta')
-
 
