@@ -1,5 +1,7 @@
 from medicos.serializers import MedicoSerializer
 from rest_framework import serializers
+
+from pacientes.models import Paciente
 from .models import Usuario
 from medicos.models import Medico
 
@@ -133,4 +135,6 @@ class ConsultaUsuarioCriadorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
         fields = ['nome', 'email']
+
+
 

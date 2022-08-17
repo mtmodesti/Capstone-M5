@@ -1,6 +1,8 @@
 from typing import Optional
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
+from convenios.models import Convenio
+
 from .models import Paciente
 from .permissions import isSuperuserOrStaff
 from .serializers import PacienteSerializer
@@ -12,6 +14,14 @@ class ListCreatePacienteView(ListCreateAPIView):
     queryset = Paciente.objects.all()
     serializer_class = PacienteSerializer
     convenio_separator = ","
+
+    def perform_create(self, serializer):
+        if "convenio" in self.request.data:
+            convenio = self.request.data['convenio']
+            convenio, _ = Convenio.objects.get_or_create(id=convenio)
+            serializer.save(convenio=convenio)
+        else:
+            serializer.save()
 
     def get_queryset(self):
         convenios = self.request.query_params.get("convenio", None)

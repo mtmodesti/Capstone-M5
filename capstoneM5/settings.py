@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_spectacular",
+    "corsheaders",
     "usuarios",
     "agendas",
     "convenios",
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware"
 ]
 
 ROOT_URLCONF = "capstoneM5.urls"
@@ -159,9 +161,11 @@ AUTH_USER_MODEL = "usuarios.Usuario"
 
 REST_FRAMEWORK = {
     "DATE_INPUT_FORMATS": [
-        ("%d-%m-%Y %H:%M"),
+        ("%d-%m-%Y"),
     ],
     "DATETIME_FORMAT": "%d-%m-%Y %H:%M",
+    "DATE_FORMAT": "%d-%m-%Y",
+    "TIME_FORMAT": "%H:%M",
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -201,3 +205,11 @@ EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    "https://clinika.vercel.app"
+]
+
+CORS_ALLOW_ALL_ORIGINS = True

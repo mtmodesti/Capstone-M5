@@ -1,5 +1,7 @@
 from rest_framework import generics
+from agendas.models import Agenda
 from medicos.models import Medico
+from pacientes.models import Paciente
 from usuarios.permissions import isSuperUser, isSuperUserOrStaff, isSuperUserOrOwner
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
@@ -13,6 +15,8 @@ from usuarios.serializers import (
 from .models import Usuario
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from medicos.serializers import MedicoSerializer
+from pacientes.serializers import PacienteSerializer
+import datetime
 
 
 ## views para usuários em geral
@@ -65,3 +69,29 @@ class ChangeActivePropertyView(generics.UpdateAPIView):
     permission_classes = [isSuperUser]
     queryset = Usuario.objects.all()
     serializer_class = ChangeActivePropertySerializer
+
+
+
+class ResumoView(APIView):
+    def get(self, request):
+        pacientes = Paciente.objects.all()
+        pacientes_serializer = PacienteSerializer(pacientes, many=True).data
+        total_de_inadimplentes = 0
+        for paciente in pacientes_serializer:
+            if paciente['total_de_consultas'] > paciente['consultas_pagas']:
+                total_de_inadimplentes = total_de_inadimplentes + 1
+
+        total_de_pacientes = Paciente.objects.all().count()
+        total_de_medicos = Usuario.objects.filter(agente_de_saude=True).count()
+        today = datetime.date.today()
+        agendados = Agenda.objects.filter(dia_da_consulta=today)
+        for agenda in Agenda.objects.filter(dia_da_consulta=today):
+            if agenda.consulta is None:
+                agendados = agendados.exclude(id=agenda.id)
+
+        return Response({
+            "total_de_pacientes":total_de_pacientes,
+            "total_de_medicos": total_de_medicos,
+            "total_agendado_hoje": agendados.count(),
+            "pacientes_inadimplentes": total_de_inadimplentes
+        })
