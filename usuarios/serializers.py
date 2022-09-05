@@ -115,7 +115,16 @@ class UsuarioMedicoSerializer(serializers.ModelSerializer):
 class UsuarioProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = "__all__"
+        fields = [
+            "id",
+            "nome",
+            "email",
+            "is_superuser",
+            "is_staff",
+            "agente_de_saude",
+            "criado_em",
+            "atualizado_em",
+        ]
         extra_kwargs = {"password": {"write_only": True}}
 
 
