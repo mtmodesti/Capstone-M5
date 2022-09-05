@@ -31,6 +31,17 @@ class ListCreatePacienteView(ListCreateAPIView):
                 qs = qs.filter(convenio__tipo=convenio)
             return qs
 
+        nome = self.request.query_params.get("nome", None)
+        if nome:
+            pacientes = Paciente.objects.all()
+            nomeToLowerCase = nome.lower()
+            for paciente in Paciente.objects.all():
+                pacienteNameLower = paciente.nome.lower()
+                if not nomeToLowerCase in pacienteNameLower:
+                    pacientes = pacientes.exclude(id=paciente.id)
+
+            return pacientes
+
         return super().get_queryset()
 
 

@@ -47,6 +47,21 @@ class ListHealthAgentView(generics.ListAPIView):
     queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
 
+    def get_queryset(self):
+
+        nome = self.request.query_params.get("nome", None)
+        if nome:
+            medicos = Medico.objects.all()
+            nomeToLowerCase = nome.lower()
+            for medico in Medico.objects.all():
+                medicoNameLower = medico.nome.lower()
+                if not nomeToLowerCase in medicoNameLower:
+                    medicos = medicos.exclude(id=medico.id)
+
+            return medicos
+
+        return super().get_queryset()
+
 
 class RetrieveUpdateDeleteHealthAgentView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [isSuperUserOrStaff]

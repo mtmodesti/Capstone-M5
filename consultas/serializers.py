@@ -34,7 +34,8 @@ class ConsultaSerializer(serializers.ModelSerializer):
             'medico',
             'criado_em',
             'atualizado_em',
-            'agenda'
+            'agenda',
+            'consulta_cancelada'
         ]
         depth = 1
         read_only_fields = [
