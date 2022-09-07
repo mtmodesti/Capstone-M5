@@ -1,22 +1,24 @@
-from rest_framework import generics
+import datetime
+
 from agendas.models import Agenda
 from medicos.models import Medico
-from pacientes.models import Paciente
-from usuarios.permissions import isSuperUser, isSuperUserOrStaff, isSuperUserOrOwner
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from usuarios.serializers import (
-    ChangeActivePropertySerializer,
-    UsuarioSerializer,
-    UsuarioMedicoSerializer,
-    UsuarioProfileSerializer,
-)
-from .models import Usuario
-from rest_framework_simplejwt.authentication import JWTAuthentication
 from medicos.serializers import MedicoSerializer
+from pacientes.models import Paciente
 from pacientes.serializers import PacienteSerializer
-import datetime
+from rest_framework import generics
+from rest_framework.permissions import (IsAuthenticated,
+                                        IsAuthenticatedOrReadOnly)
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
+from usuarios.permissions import (isSuperUser, isSuperUserOrOwner,
+                                  isSuperUserOrStaff)
+from usuarios.serializers import (ChangeActivePropertySerializer,
+                                  UsuarioMedicoSerializer,
+                                  UsuarioProfileSerializer, UsuarioSerializer)
+
+from .models import Usuario
 
 
 ## views para usuários em geral
@@ -51,7 +53,7 @@ class ListHealthAgentView(generics.ListAPIView):
 
         nome = self.request.query_params.get("nome", None)
         if nome:
-            medicos = Medico.objects.all()
+            medicos = Medico.objects.all().order_by("nome")
             nomeToLowerCase = nome.lower()
             for medico in Medico.objects.all():
                 medicoNameLower = medico.nome.lower()
@@ -60,7 +62,7 @@ class ListHealthAgentView(generics.ListAPIView):
 
             return medicos
 
-        return super().get_queryset()
+        return super().get_queryset().order_by("nome")
 
 
 class RetrieveUpdateDeleteHealthAgentView(generics.RetrieveUpdateDestroyAPIView):
