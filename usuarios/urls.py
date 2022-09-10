@@ -11,6 +11,7 @@ urlpatterns = [
     path("usuarios/<pk>/", views.RetrieveUpdateDestroyUsuarioView.as_view()),
     path("usuarios/medico/criar/", views.CreateHealthAgentView.as_view()),
     path("usuarios/medico/listar/", views.ListHealthAgentView.as_view()),
+    path("usuarios/medico/todos/", views.ListAllHealthAgentView.as_view()),
     path("usuarios/medico/<pk>/", views.RetrieveUpdateDeleteHealthAgentView.as_view()),
-    path("usuarios/ativar-desativar/<pk>/", views.ChangeActivePropertyView.as_view())
+    path("usuarios/ativar-desativar/<pk>/", views.ChangeActivePropertyView.as_view()),
 ]

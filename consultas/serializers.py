@@ -86,7 +86,8 @@ class ConsultaAgendaSerializer(serializers.ModelSerializer):
             'pago',
             'criado_em',
             'atualizado_em',
-            'paciente'
+            'paciente',
+            'consulta_cancelada'
         ]
 
 
