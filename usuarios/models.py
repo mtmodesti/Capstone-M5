@@ -14,7 +14,7 @@ class Usuario(AbstractUser):
     criado_em = models.DateTimeField(default=timezone.now,  )
     atualizado_em = models.DateTimeField(auto_now=True)
     username = None
-    
+    foto_perfil = models.CharField(max_length=400, default=None, null=True)
     REQUIRED_FIELDS = ["nome"]
     USERNAME_FIELD = "email"
     

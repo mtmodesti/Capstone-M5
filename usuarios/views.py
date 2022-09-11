@@ -106,6 +106,7 @@ class ResumoView(APIView):
             if agenda.consulta is None:
                 agendados = agendados.exclude(id=agenda.id)
 
+
         return Response(
             {
                 "total_de_pacientes": total_de_pacientes,
@@ -114,6 +115,11 @@ class ResumoView(APIView):
                 "pacientes_inadimplentes": total_de_inadimplentes,
             }
         )
+
+class ListUpdateAtendente(generics.ListAPIView):
+    permission_classes=[isSuperUser]
+    queryset = Usuario.objects.filter(is_staff=True, is_superuser=False)
+    serializer_class = UsuarioProfileSerializer
 
 
 class ListAllHealthAgentView(generics.ListAPIView):
@@ -137,3 +143,4 @@ class ListAllHealthAgentView(generics.ListAPIView):
         serializer = MedicoSerializer(medicos, many=True)
 
         return Response(serializer.data)
+
