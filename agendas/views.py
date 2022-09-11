@@ -34,7 +34,8 @@ class ListCreateAgendaView(generics.ListCreateAPIView):
     serializer_class = AgendaSerializer
     def get_queryset(self):
         data = self.request.query_params.get('data')
-        agendas = Agenda.objects.filter(medico=self.kwargs['medico_id'])
+        agendas = Agenda.objects.all()
+        agendas = agendas.filter(medico=self.kwargs['medico_id'])
         if data:
             data_separada = data.split('-')
             try:
