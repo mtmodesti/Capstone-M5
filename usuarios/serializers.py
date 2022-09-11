@@ -16,6 +16,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
             "is_active",
             "password",
             "criado_em",
+            "foto_perfil",
             "atualizado_em",
         ]
         extra_kwargs = {
@@ -30,6 +31,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
             "nome": instance.nome,
             "email": instance.email,
             "ativo": instance.is_active,
+            "foto_perfil": instance.foto_perfil,
             "criado_em": instance.criado_em,
             "atualizado_em": instance.atualizado_em,
         }
@@ -124,6 +126,8 @@ class UsuarioProfileSerializer(serializers.ModelSerializer):
             "agente_de_saude",
             "criado_em",
             "atualizado_em",
+            "foto_perfil",
+            "is_active"
         ]
         extra_kwargs = {"password": {"write_only": True}}
 

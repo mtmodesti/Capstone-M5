@@ -112,3 +112,10 @@ class ResumoView(APIView):
             "total_agendado_hoje": agendados.count(),
             "pacientes_inadimplentes": total_de_inadimplentes
         })
+
+
+class ListUpdateAtendente(generics.ListAPIView):
+    permission_classes=[isSuperUser]
+    queryset = Usuario.objects.filter(is_staff=True, is_superuser=False)
+    serializer_class = UsuarioProfileSerializer
+
